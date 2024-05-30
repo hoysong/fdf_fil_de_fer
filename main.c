@@ -1,0 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
+/*   Updated: 2024/05/31 05:56:32 by hoysong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <X11/X.h>
+#include <X11/keysym.h>
+#include "minilibx-linux/mlx.h"
+#include "libft/libft.h"
+#define OPEN_ERR	1
+#define FILE_NAME_ERR		2
+
+typedef struct s_list_1
+{
+	void	*init_ptr;
+	void	*win_ptr;
+	char	**gnl_str;
+}			t_mlx_ptrs;
+
+int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
+{
+	printf("input: %d\n", input);
+	if (input == XK_Escape)
+	{
+		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
+		mlx_destroy_display(mlx_ptrs->init_ptr);
+		free(mlx_ptrs->init_ptr);
+		exit(1);
+	}
+	return (0);
+}
+
+void err_hdler(int err_num)
+{
+	if (err_num == OPEN_ERR)
+	{
+		write(1, "[err code: 1] OPEN_ERR", 22);
+		exit(1);
+	}
+}
+
+int	main(int argc, char *argv[])
+{
+	int		fd;
+	int		i;
+	char	**str;
+	t_mlx_ptrs	mlx_ptrs;
+
+	i = 0;
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		err_hdler(OPEN_ERR);
+	mlx_ptrs.init_ptr = mlx_init();
+	if (mlx_ptrs.init_ptr == 0)
+	{
+		mlx_destroy_display(mlx_ptrs.init_ptr);
+		free(mlx_ptrs.init_ptr);
+	}
+	mlx_ptrs.win_ptr = mlx_new_window(mlx_ptrs.init_ptr, 500, 500, "window_1");
+	if (mlx_ptrs.win_ptr == 0)
+	{
+		mlx_destroy_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr);
+		mlx_destroy_display(mlx_ptrs.init_ptr);
+		free(mlx_ptrs.init_ptr);
+	}
+	
+//	while (1)
+//	{
+//		str[i] = get_next_line(fd);
+//		if (str[i] == NULL)
+//			break;
+//		printf("str%d: %s", i, str[i]);
+//		i++;
+//	}
+	mlx_ptrs.gnl_str = str;
+	printf("%s", mlx_ptrs.gnl_str[0]);
+	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
+	mlx_loop(mlx_ptrs.init_ptr);
+}
