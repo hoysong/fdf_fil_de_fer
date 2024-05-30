@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/05/31 05:56:32 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/05/31 06:03:18 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ int	main(int argc, char *argv[])
 		free(mlx_ptrs.init_ptr);
 	}
 	
-//	while (1)
-//	{
-//		str[i] = get_next_line(fd);
-//		if (str[i] == NULL)
-//			break;
-//		printf("str%d: %s", i, str[i]);
-//		i++;
-//	}
+	while (1)
+	{
+		str[i] = get_next_line(fd);
+		if (str[i] == NULL)
+			break;
+		printf("str%d: %s", i, str[i]);
+		i++;
+	}
 	mlx_ptrs.gnl_str = str;
 	printf("%s", mlx_ptrs.gnl_str[0]);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
