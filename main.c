@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/05/31 06:03:18 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/04 07:54:37 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@
 #include <unistd.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
+
 #include "minilibx-linux/mlx.h"
-#include "libft/libft.h"
-#define OPEN_ERR	1
-#define FILE_NAME_ERR		2
+#include "my_libft/linked_list/lkdlist.h"
+#include "my_libft/libft.h"
+#define OPEN_ERR		1
+#define FILE_NAME_ERR	2
+#define MAP_ERR			3
 
 typedef struct s_list_1
 {
 	void	*init_ptr;
 	void	*win_ptr;
-	char	**gnl_str;
+	t_dnode	*gnl_node;
 }			t_mlx_ptrs;
 
 int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
@@ -41,7 +44,7 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 	return (0);
 }
 
-void err_hdler(int err_num)
+void	err_hdler(int err_num)
 {
 	if (err_num == OPEN_ERR)
 	{
@@ -50,11 +53,46 @@ void err_hdler(int err_num)
 	}
 }
 
+
+
+t_dnode	*parse_file(int fd)
+{
+	t_dnode	*gnl_node;
+	t_dnode	*node_head;
+
+	char	**splits;
+
+	gnl_node = init_dubl();
+	node_head = gnl_node;
+	while (1)
+	{
+		gnl_node->next_node = init_dubl();
+		gnl_node->next_node->data = get_next_line(fd);
+		gnl_node->next_node->prev_node = gnl_node;
+		gnl_node = gnl_node->next_node;
+		if (gnl_node->data == NULL)
+			break ;
+	}
+/* == debug == */
+	printf("doubly_linked_list's data\n");
+	t_dnode	*print_node;
+	print_node = node_head;
+	print_node = print_node->next_node;
+	while (print_node->data != NULL)
+	{
+		printf("%s", (char *)print_node->data);
+		print_node = print_node->next_node;
+	}
+/*============*/
+	destroy_doubly_list(node_head);
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
-	int		fd;
-	int		i;
-	char	**str;
+	int			fd;
+	int			i;
+	char		**str;
 	t_mlx_ptrs	mlx_ptrs;
 
 	i = 0;
@@ -74,17 +112,7 @@ int	main(int argc, char *argv[])
 		mlx_destroy_display(mlx_ptrs.init_ptr);
 		free(mlx_ptrs.init_ptr);
 	}
-	
-	while (1)
-	{
-		str[i] = get_next_line(fd);
-		if (str[i] == NULL)
-			break;
-		printf("str%d: %s", i, str[i]);
-		i++;
-	}
-	mlx_ptrs.gnl_str = str;
-	printf("%s", mlx_ptrs.gnl_str[0]);
+	mlx_ptrs.gnl_node = parse_file(fd);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
