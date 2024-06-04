@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/04 07:54:37 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/04 18:14:35 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,59 @@ void	err_hdler(int err_num)
 {
 	if (err_num == OPEN_ERR)
 	{
-		write(1, "[err code: 1] OPEN_ERR", 22);
+		write(1, "[err code: 1] OPEN_ERR\n", 23);
 		exit(1);
 	}
 }
 
+char	***get_splits(t_dnode *node_head, int file_line_count)
+{
+	char	***splits;
 
+	splits = ft_calloc(file_line_count + 1, sizeof(char *));
+	while (file_line_count)
+	{
+		*splits = ft_split(node_head->data, ' ');
+		splits++;
+		node_head = node_head->next_node;
+		file_line_count--;
+	}
+	return (splits);
+}
+
+void	free_parsed(char ***parsed)
+{
+	char	***ptr;
+	ptr = parsed;
+	(*ptr)
+	free();
+}
 
 t_dnode	*parse_file(int fd)
 {
 	t_dnode	*gnl_node;
 	t_dnode	*node_head;
-
-	char	**splits;
+	int		file_line_count;
+	char	***parsed;
 
 	gnl_node = init_dubl();
 	node_head = gnl_node;
+	file_line_count = 0;
 	while (1)
 	{
-		gnl_node->next_node = init_dubl();
-		gnl_node->next_node->data = get_next_line(fd);
-		gnl_node->next_node->prev_node = gnl_node;
-		gnl_node = gnl_node->next_node;
+		gnl_node = insert_data_dubl(gnl_node, get_next_line(fd));
+//		gnl_node->next_node = init_dubl();
+//		gnl_node->next_node->data = get_next_line(fd);
+//		gnl_node->next_node->prev_node = gnl_node;
+//		gnl_node = gnl_node->next_node;
+		file_line_count++;
 		if (gnl_node->data == NULL)
 			break ;
 	}
+	file_line_count--;
+
 /* == debug == */
+	printf("file's line: %d\n", file_line_count);
 	printf("doubly_linked_list's data\n");
 	t_dnode	*print_node;
 	print_node = node_head;
@@ -84,6 +111,8 @@ t_dnode	*parse_file(int fd)
 		print_node = print_node->next_node;
 	}
 /*============*/
+	parsed = get_splits(node_head, file_line_count);
+	free_parsed(parsed);
 	destroy_doubly_list(node_head);
 	return (0);
 }

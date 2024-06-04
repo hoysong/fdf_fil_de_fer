@@ -1,3 +1,9 @@
+# ar's -r -u -s to -r -u
+# %.o: %.c
+#	 $(CC) $(CFLAGS) -c $? -o $@
+# is replaced by
+# "OBJS = $(SRCS:.c=.o)"
+
 SRCS = \
        ft_split.c \
        ft_atoi.c \
@@ -33,10 +39,7 @@ SRCS = \
        ft_putnbr_fd.c \
        ft_toupper.c \
        ft_putstr_fd.c \
-	   get_next_line.c \
-	   ./linked_list/doubly_lkdlist.c \
-	   ./linked_list/doubly_lkdlist_destroy.c \
-	   ./linked_list/singly_lkdlist.c
+	   get_next_line.c
 
 CC = cc
 

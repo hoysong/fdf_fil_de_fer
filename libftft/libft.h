@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:07:21 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/04 15:37:29 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/05/28 13:37:18 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # ifndef GNL_BUFFER_SIZE
-#  define GNL_BUFFER_SIZE 10000
+#  define GNL_BUFFER_SIZE 42
 # endif
 
 typedef struct s_list
