@@ -40,7 +40,7 @@ SRCS = \
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 

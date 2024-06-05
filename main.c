@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/04 18:14:35 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/05 22:06:13 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,33 @@ char	***get_splits(t_dnode *node_head, int file_line_count)
 {
 	char	***splits;
 
-	splits = ft_calloc(file_line_count + 1, sizeof(char *));
+	char	***return_ptr;
+
+	splits = ft_calloc(file_line_count + 1, sizeof(char *)); // 대입연산 비효율적임.
+	//return_ptr = splits;
+	//양방향도..
+	node_head = node_head->next_node;
+	int	index = 0;
 	while (file_line_count)
 	{
-		*splits = ft_split(node_head->data, ' ');
-		splits++;
+		*splits = ft_split((char *)node_head->data, ' ');
+		++splits;
 		node_head = node_head->next_node;
 		file_line_count--;
 	}
-	return (splits);
+	while (return_ptr[index])
+	{
+		printf("splits: %s", (*splits)[index]);
+		index++;
+	}
+	return (return_ptr);
 }
 
-void	free_parsed(char ***parsed)
-{
-	char	***ptr;
-	ptr = parsed;
-	(*ptr)
-	free();
-}
+//int	map_vld_chk(char ***splits);
+
+//void	free_parsed(char ***parsed)
+//{
+//}
 
 t_dnode	*parse_file(int fd)
 {
@@ -98,7 +107,6 @@ t_dnode	*parse_file(int fd)
 			break ;
 	}
 	file_line_count--;
-
 /* == debug == */
 	printf("file's line: %d\n", file_line_count);
 	printf("doubly_linked_list's data\n");
@@ -112,7 +120,8 @@ t_dnode	*parse_file(int fd)
 	}
 /*============*/
 	parsed = get_splits(node_head, file_line_count);
-	free_parsed(parsed);
+/* == print splits == */
+//	free_parsed(parsed);
 	destroy_doubly_list(node_head);
 	return (0);
 }
