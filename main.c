@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/05 22:06:13 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/07 17:08:43 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,27 @@ typedef struct s_list_1
 {
 	void	*init_ptr;
 	void	*win_ptr;
-	t_dnode	*gnl_node;
+	void	*data;
+	t_dnode	*pars_data;
 }			t_mlx_ptrs;
+
+int	ft_atoi(const char *char_num)
+{
+	int	int_num;
+	int	minus;
+
+	int_num = 0;
+	minus = 1;
+	if (*char_num == '-')
+	{
+		minus = -1;
+		char_num++;
+	}
+	while (*char_num && *char_num >= '0' && *char_num <= '9')
+		int_num = int_num * 10 + *(char *)char_num++ - '0';
+	int_num *= minus;
+	return (int_num);
+}
 
 int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 {
@@ -53,44 +72,66 @@ void	err_hdler(int err_num)
 	}
 }
 
-char	***get_splits(t_dnode *node_head, int file_line_count)
+char	***get_space_splits(t_dnode *gnl_head, int file_line_count)
 {
 	char	***splits;
+	int		third_index;
+	splits = (char ***)malloc(sizeof(char *) * (file_line_count + 1));
+	if (splits == NULL)
+		return (0);
 
-	char	***return_ptr;
+	third_index = 0;
 
-	splits = ft_calloc(file_line_count + 1, sizeof(char *)); // 대입연산 비효율적임.
-	//return_ptr = splits;
-	//양방향도..
-	node_head = node_head->next_node;
-	int	index = 0;
-	while (file_line_count)
+	gnl_head = gnl_head->next_node;
+	splits[file_line_count] = NULL; // init 3dim ptr's last addr.
+
+	while (third_index < file_line_count)
 	{
-		*splits = ft_split((char *)node_head->data, ' ');
-		++splits;
-		node_head = node_head->next_node;
-		file_line_count--;
+		splits[third_index] = ft_split((char *)gnl_head->data, ' ');
+		gnl_head = gnl_head->next_node;
+		++third_index;
 	}
-	while (return_ptr[index])
-	{
-		printf("splits: %s", (*splits)[index]);
-		index++;
-	}
-	return (return_ptr);
+
+	return (splits);
 }
 
-//int	map_vld_chk(char ***splits);
-
-//void	free_parsed(char ***parsed)
+//char	***get_comma_splits(char ***spc_splits)
 //{
+//	char	;
 //}
 
-t_dnode	*parse_file(int fd)
+//int	map_vld_chk(char ***splits);
+void	free_splits(char ***splits)
+{
+	int		third_index;
+	int		second_index;
+
+	third_index = 0;
+	second_index = 0;
+	while (splits[third_index] != NULL)
+	{
+		printf("=== 3rd dim: %d ===\n", third_index);
+		while (splits[third_index][second_index] != NULL)
+		{
+			printf("2nd dim[%d]: %s\n", second_index, splits[third_index][second_index]);
+			free(splits[third_index][second_index]);
+			++second_index;
+		}
+		printf("2nd dim[%d]: %s\n\n", second_index, splits[third_index][second_index]);
+		second_index = 0;
+		free(splits[third_index]);
+		++third_index;
+	}
+	printf("3rd dim's last: %p\n", splits[third_index]);
+	free(splits);
+}
+
+t_dnode	*get_parse_data(int fd)
 {
 	t_dnode	*gnl_node;
 	t_dnode	*node_head;
 	int		file_line_count;
-	char	***parsed;
+	char	***splits;
 
 	gnl_node = init_dubl();
 	node_head = gnl_node;
@@ -98,10 +139,6 @@ t_dnode	*parse_file(int fd)
 	while (1)
 	{
 		gnl_node = insert_data_dubl(gnl_node, get_next_line(fd));
-//		gnl_node->next_node = init_dubl();
-//		gnl_node->next_node->data = get_next_line(fd);
-//		gnl_node->next_node->prev_node = gnl_node;
-//		gnl_node = gnl_node->next_node;
 		file_line_count++;
 		if (gnl_node->data == NULL)
 			break ;
@@ -118,10 +155,11 @@ t_dnode	*parse_file(int fd)
 		printf("%s", (char *)print_node->data);
 		print_node = print_node->next_node;
 	}
+	printf("\n");
 /*============*/
-	parsed = get_splits(node_head, file_line_count);
-/* == print splits == */
-//	free_parsed(parsed);
+	splits = get_space_splits(node_head, file_line_count);
+	//get_comma_splits();
+	free_splits(splits);
 	destroy_doubly_list(node_head);
 	return (0);
 }
@@ -150,7 +188,7 @@ int	main(int argc, char *argv[])
 		mlx_destroy_display(mlx_ptrs.init_ptr);
 		free(mlx_ptrs.init_ptr);
 	}
-	mlx_ptrs.gnl_node = parse_file(fd);
+	mlx_ptrs.pars_data = get_parse_data(fd);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
