@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/08 03:35:04 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/08 05:09:47 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,45 +114,38 @@ int	count_line_elements(char **splits_one_line)
 	return (elements);
 }
 
-//int	***call_atoi(char ***splits)
-//{
-//	int		third_index;
-//	int		second_index;
-//	int		x_elements;
-//	int		elements_now;
-//
-//	third_index = 0;
-//	second_index = 0;
-//	x_elements = count_line_elements(splits[third_index]);
-//	while (splits[third_index] != NULL)
-//	{
-//		printf("=== 3rd dim: %d ===\n", third_index);
-//		while (splits[third_index][second_index] != NULL)
-//		{
-//			printf("2nd dim[%d]: %s\n", second_index, splits[third_index][second_index]);
-//			free(splits[third_index][second_index]);
-//			++second_index;
-//		}
-//		printf("2nd dim[%d]: %s\n\n", second_index, splits[third_index][second_index]);
-//		second_index = 0;
-//		free(splits[third_index]);
-//		++third_index;
-//	}
-//	printf("3rd dim's last: %p\n", splits[third_index]);
-//	free(splits);
-//	return (0);
-//}
+static void	setup_call_atoi(int *second_index, int *x_elements, char ****free_splits, char ***splits)
+{
+	*second_index = 0;
+	*free_splits = splits;
+	*x_elements = count_line_elements((*splits));
+}
 
-int	***call_atoi(char ***splits)
+int	***gen_int_arr(int x_elements, int file_line_count)
+{
+	printf("gen int arr...\n");
+	int	***arr;
+
+	arr = (int ***)malloc(sizeof(int *) * 3);
+	if (arr == NULL)
+		return (0);
+	arr[2] = NULL;
+
+	arr[0] = (int **)malloc(sizeof(int *) * file_line_count);
+	free(arr[0]);
+	free(arr);
+	return (arr);
+}
+
+int	***call_atoi(char ***splits, int file_line_count)
 {
 	char	***free_splits;
+	int		***atoi_data;
 	int		second_index;
 	int		x_elements;
-	int		elements_now;
 
-	second_index = 0;
-	x_elements = count_line_elements(*splits);
-	free_splits = splits;
+	setup_call_atoi(&second_index, &x_elements, &free_splits,splits);
+	atoi_data = gen_int_arr(x_elements, file_line_count);
 	while ((*splits) != NULL)
 	{
 		while ((*splits)[second_index] != NULL)
@@ -160,9 +153,11 @@ int	***call_atoi(char ***splits)
 			free((*splits)[second_index]);
 			++second_index;
 		}
-		second_index = 0;
 		free((*splits));
 		++splits;
+		if ((second_index != x_elements) && (*splits) != NULL)
+			printf("!!ivld_map_detected!!\n");
+		second_index = 0;
 	}
 	free(free_splits);
 	return (0);
@@ -189,7 +184,7 @@ char	***atoi_after_split(t_dnode *gnl_head, int file_line_count)
 		gnl_head = gnl_head->next_node;
 		++third_index;
 	}
-	call_atoi(splits);
+	call_atoi(splits, file_line_count);
 	//free_splits(splits);
 	return (splits);
 }
@@ -200,7 +195,6 @@ t_dnode	*get_parsed_data(int fd)
 	t_dnode	*node_head;
 	int		file_line_count;
 	char	***splits;
-	char	***splits_head;
 
 	gnl_node = init_dubl();
 	node_head = gnl_node;
