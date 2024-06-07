@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/08 05:09:47 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/08 05:16:09 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ t_dnode	*get_parsed_data(int fd)
 	gnl_node = init_dubl();
 	node_head = gnl_node;
 	file_line_count = 0;
+
 	while (1)
 	{
 		gnl_node = insert_data_dubl(gnl_node, get_next_line(fd));
