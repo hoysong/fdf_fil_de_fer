@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 09:47:02 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/09 09:58:54 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,13 +165,14 @@ int	***gen_int_arr(int x_elements, int file_line_count)
 		if (arr_3[third] == NULL)
 			return (0);
 		arr_3[third][file_line_count] = NULL;
-		while (arr_3[third][second])
+		while (second < file_line_count)
 		{
 			arr_3[third][second] = (int *)malloc(sizeof(int) * (x_elements));
 			if (arr_3[third][second] == NULL)
 				return (0);
 			second++;
 		}
+		second = 0;
 		third++;
 	}
 	return (arr_3);
