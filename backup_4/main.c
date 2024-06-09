@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 09:58:54 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/09 11:06:35 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,33 +121,6 @@ static void	setup_call_atoi(int *second_index, int *x_elements, char ****free_sp
 	*x_elements = count_line_elements((*splits));
 }
 
-//int	***gen_int_arr(int x_elements, int file_line_count)
-//{
-//	printf("gen int arr...\n");
-//	int	***arr_3;
-//	int	thr_dim;
-//	int	sec_dim;
-//
-//	thr_dim = 0;
-//	sec_dim = 0;
-//	arr_3 = (int ***)malloc(sizeof(int *) * 3);
-//	if (arr_3 == NULL)
-//		return (0);
-//	arr_3[2] = NULL;
-//
-//	arr_3[0] = malloc(sizeof(int *) * (file_line_count + 1));
-//	if (arr_3[0] == NULL)
-//		return (0);
-//	arr_3[0][file_line_count] = NULL;
-//
-//	arr_3[1] = malloc(sizeof(int *) * (file_line_count + 1));
-//	if (arr_3[1] == NULL)
-//		return (0);
-//	arr_3[1][file_line_count] = NULL;
-//
-//	return (arr_3);
-//}
-
 int	***gen_int_arr(int x_elements, int file_line_count)
 {
 	printf("gen int arr...\n");
@@ -159,7 +132,7 @@ int	***gen_int_arr(int x_elements, int file_line_count)
 	arr_3[2] = NULL;
 	third = 0;
 	second = 0;
-	while (arr_3[third] != NULL) // gen **arr
+	while (third < 3) // gen **arr
 	{
 		arr_3[third] = (int **)malloc(sizeof(int *) * (file_line_count + 1));
 		if (arr_3[third] == NULL)
@@ -181,16 +154,18 @@ int	***gen_int_arr(int x_elements, int file_line_count)
 int	***call_atoi(char ***splits, int file_line_count)
 {
 	char	***free_splits;
+	char	***free_2_dim;
 	int		***int_arr;
 	int		second_index;
 	int		x_elements;
 
 	setup_call_atoi(&second_index, &x_elements, &free_splits,splits);
-	int_arr = gen_int_arr(x_elements, file_line_count);
+//	int_arr = gen_int_arr(x_elements, file_line_count);
 	while ((*splits) != NULL)
 	{
 		while ((*splits)[second_index] != NULL)
 		{
+			int_arr[0][0][second_index] = fdf_atoi((*splits)[second_index]);
 			free((*splits)[second_index]);
 			++second_index;
 		}
