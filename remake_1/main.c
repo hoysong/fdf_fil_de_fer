@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 17:09:49 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/09 17:24:44 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,32 +64,6 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 
 // ===============================================================================================================
 
-void	free_splits(char ***splits)
-{
-	int		third;
-	int		second_index;
-
-	third = 0;
-	second_index = 0;
-	while (splits[third] != NULL)
-	{
-		printf("=== 3rd dim: %d ===\n", third);
-		while (splits[third][second_index] != NULL)
-		{
-			printf("2nd dim[%d]: %s\n", second_index, splits[third][second_index]);
-			free(splits[third][second_index]);
-			++second_index;
-		}
-		printf("2nd dim[%d]: %s\n\n", second_index, splits[third][second_index]);
-		second_index = 0;
-		free(splits[third]);
-		++third;
-	}
-	printf("3rd dim's last: %p\n", splits[third]);
-	free(splits);
-}
-
-
 t_mlx_ptrs	*get_parsed_data(int fd)
 {
 	char	***splits;
@@ -97,8 +71,10 @@ t_mlx_ptrs	*get_parsed_data(int fd)
 	int		map_chk_flg;
 
 	file_line_count = 0;
-	splits = read_file(fd, &file_line_count);
-	map_chk_flg = map_vld_chk(splits);
+	map_chk_flg = map_vld_chk(read_file(fd, &file_line_count));
+	/* THE LINES BELOW ARE SAME ABOVE */
+		//splits = read_file(fd, &file_line_count);
+		//map_chk_flg = map_vld_chk(splits);
 	return (0);
 }
 

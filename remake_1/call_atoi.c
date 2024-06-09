@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:15:46 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 17:09:18 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/09 17:19:52 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void	setup(int *second_index, int *x_elements, char ****free_splits, char
 int	map_vld_chk(char ***splits)
 {
 	char	***free_splits;
-	char	***free_2_dim;
 	int		second_index;
 	int		x_elements;
 	int		map_chk_flg;
