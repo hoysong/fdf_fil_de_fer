@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 17:27:22 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/09 18:34:04 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ t_mlx_ptrs	*get_parsed_data(int fd)
 	int		map_chk_flg;
 
 	file_line_count = 0;
-	map_chk_flg = map_vld_chk(read_file(fd, &file_line_count));
-	/* the lines below are same above */
-		//splits = read_file(fd, &file_line_count);
-		//map_chk_flg = map_vld_chk(splits);
+	splits = read_file(fd, &file_line_count); // split with ft_split
+	// splits_to_int(splits); // make int arr from splits
+	map_chk_flg = map_vld_chk(splits); // free splits and map vld chk
+	//if (map_vld_chk == 0)
+	//	return (0);
 	return (0);
 }
 

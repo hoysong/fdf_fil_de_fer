@@ -6,27 +6,10 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:15:46 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 17:19:52 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/09 18:34:05 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "my_fdf.h"
-#include "my_libft/linked_list/lkdlist.h"
-
-static int	count_x_elements(char **splits_one_line)
-{
-	int	elements;
-
-	elements = 0;
-	// count unitl splits_one_line is not NULL
-	// and go back 1 byte to check it is newlin
-	while (*splits_one_line != NULL)
-	{
-		++elements;
-		++splits_one_line;
-	}
-	return (elements);
-}
 
 int	***gen_int_arr(int x_elements, int file_line_count)
 {
@@ -56,6 +39,21 @@ int	***gen_int_arr(int x_elements, int file_line_count)
 		third++;
 	}
 	return (arr_3);
+}
+
+static int	count_x_elements(char **splits_one_line)
+{
+	int	elements;
+
+	elements = 0;
+	// count unitl splits_one_line is not NULL
+	// and go back 1 byte to check it is newlin
+	while (*splits_one_line != NULL)
+	{
+		++elements;
+		++splits_one_line;
+	}
+	return (elements);
 }
 
 static void	setup(int *second_index, int *x_elements, char ****free_splits, char ***splits)

@@ -6,13 +6,10 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 16:10:05 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/09 17:57:29 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "my_fdf.h"
-#include "my_libft/libft.h"
-#include "my_libft/linked_list/lkdlist.h"
 
 static char	***get_splits(t_dnode *gnl_head, int file_line_count)
 {
@@ -27,7 +24,7 @@ static char	***get_splits(t_dnode *gnl_head, int file_line_count)
 	third_index = 0;
 
 	gnl_head = gnl_head->next_node;
-	splits[file_line_count] = NULL; // init 3dim ptr's last addr.
+	splits[file_line_count] = NULL;
 
 	while (third_index < file_line_count)
 	{
@@ -35,8 +32,6 @@ static char	***get_splits(t_dnode *gnl_head, int file_line_count)
 		gnl_head = gnl_head->next_node;
 		++third_index;
 	}
-//	call_atoi(splits, file_line_count);
-	//free_splits(splits);
 	return (splits);
 }
 
