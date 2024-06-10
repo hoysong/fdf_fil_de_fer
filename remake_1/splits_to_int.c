@@ -6,11 +6,12 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:03:43 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 18:33:42 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/10 11:27:42 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
 
 int	***splits_to_int(char ***splits)
 {
+	return (0);
 }

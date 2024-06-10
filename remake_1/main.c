@@ -6,29 +6,39 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 18:34:04 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/10 11:47:48 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-#define OPEN_ERR		1
-#define FILE_NAME_ERR	2
-#define MAP_ERR			3
+#define OPEN_ERR		1 // open() err
+#define FILE_NAME_ERR	2 // 
+#define MAP_ERR			3 // 
 
 typedef struct s_list_1
 {
 	void	*init_ptr;
 	void	*win_ptr;
 	void	*data;
+	int		err_code;
 }			t_mlx_ptrs;
 
-void	err_hdler(int err_num)
+void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 {
 	if (err_num == OPEN_ERR)
 	{
 		write(1, "[err code: 1] OPEN_ERR\n", 23);
 		exit(1);
 	}
+	else if (err_num == MAP_ERR)
+	{
+		write(1, "[err codd: 3] IVLD_MAP\n", 23);
+		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
+		mlx_destroy_display(mlx_ptrs->init_ptr);
+		free(mlx_ptrs->init_ptr);
+		exit(1);
+	}
+	return ;
 }
 
 int	ft_atoi(const char *char_num)
@@ -64,19 +74,19 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 
 // ===============================================================================================================
 
-t_mlx_ptrs	*get_parsed_data(int fd)
+void	get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 {
 	char	***splits;
 	int		file_line_count;
 	int		map_chk_flg;
 
+	map_chk_flg = 1;
 	file_line_count = 0;
 	splits = read_file(fd, &file_line_count); // split with ft_split
 	// splits_to_int(splits); // make int arr from splits
 	map_chk_flg = map_vld_chk(splits); // free splits and map vld chk
-	//if (map_vld_chk == 0)
-	//	return (0);
-	return (0);
+	if (map_chk_flg == 0)
+		err_hdler(MAP_ERR, mlx_ptrs);
 }
 
 int	main(int argc, char *argv[])
@@ -89,7 +99,7 @@ int	main(int argc, char *argv[])
 	i = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		err_hdler(OPEN_ERR);
+		err_hdler(OPEN_ERR, 0);
 	mlx_ptrs.init_ptr = mlx_init();
 	if (mlx_ptrs.init_ptr == 0)
 	{
@@ -103,7 +113,7 @@ int	main(int argc, char *argv[])
 		mlx_destroy_display(mlx_ptrs.init_ptr);
 		free(mlx_ptrs.init_ptr);
 	}
-	mlx_ptrs.data = get_parsed_data(fd);
+	get_parsed_data(fd, &mlx_ptrs);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
