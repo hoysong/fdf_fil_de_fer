@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 18:34:04 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:08:19 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,23 @@ t_mlx_ptrs	*get_parsed_data(int fd)
 	return (0);
 }
 
+static void	setup_main(t_mlx_ptrs *mlx_ptrs)
+{
+	mlx_ptrs->init_ptr = mlx_init();
+	if (mlx_ptrs->init_ptr == 0)
+	{
+		mlx_destroy_display(mlx_ptrs->init_ptr);
+		free(mlx_ptrs->init_ptr);
+	}
+	mlx_ptrs->win_ptr = mlx_new_window(mlx_ptrs->init_ptr, 500, 500, "window_1");
+	if (mlx_ptrs->win_ptr == 0)
+	{
+		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
+		mlx_destroy_display(mlx_ptrs->init_ptr);
+		free(mlx_ptrs->init_ptr);
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	int			fd;
@@ -90,19 +107,7 @@ int	main(int argc, char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		err_hdler(OPEN_ERR);
-	mlx_ptrs.init_ptr = mlx_init();
-	if (mlx_ptrs.init_ptr == 0)
-	{
-		mlx_destroy_display(mlx_ptrs.init_ptr);
-		free(mlx_ptrs.init_ptr);
-	}
-	mlx_ptrs.win_ptr = mlx_new_window(mlx_ptrs.init_ptr, 500, 500, "window_1");
-	if (mlx_ptrs.win_ptr == 0)
-	{
-		mlx_destroy_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr);
-		mlx_destroy_display(mlx_ptrs.init_ptr);
-		free(mlx_ptrs.init_ptr);
-	}
+	setup_main(&mlx_ptrs);
 	mlx_ptrs.data = get_parsed_data(fd);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
