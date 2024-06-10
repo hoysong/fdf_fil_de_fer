@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:15:46 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 18:34:05 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/10 18:06:33 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -81,7 +81,10 @@ int	map_vld_chk(char ***splits)
 		free((*splits));
 		++splits;
 		if ((second_index != x_elements) && (*splits) != NULL)
+		{
+			printf("[  ivld map  ]\n");
 			map_chk_flg = 0;
+		}
 		second_index = 0;
 	}
 	free(free_splits);

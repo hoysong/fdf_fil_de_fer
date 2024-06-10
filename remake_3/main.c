@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/10 15:08:19 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/10 18:03:24 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ typedef struct s_list_1
 	void	*win_ptr;
 	void	*data;
 }			t_mlx_ptrs;
-
-void	err_hdler(int err_num)
-{
-	if (err_num == OPEN_ERR)
-	{
-		write(1, "[err code: 1] OPEN_ERR\n", 23);
-		exit(1);
-	}
-}
 
 int	ft_atoi(const char *char_num)
 {
@@ -62,9 +53,18 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 	return (0);
 }
 
-// ===============================================================================================================
+// ===================================================================================
 
-t_mlx_ptrs	*get_parsed_data(int fd)
+void	err_hdler(int err_num)
+{
+	if (err_num == OPEN_ERR)
+	{
+		write(1, "[err code: 1] OPEN_ERR\n", 23);
+		exit(1);
+	}
+}
+
+t_mlx_ptrs	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 {
 	char	***splits;
 	int		file_line_count;
@@ -108,7 +108,7 @@ int	main(int argc, char *argv[])
 	if (fd < 0)
 		err_hdler(OPEN_ERR);
 	setup_main(&mlx_ptrs);
-	mlx_ptrs.data = get_parsed_data(fd);
+	mlx_ptrs.data = get_parsed_data(fd, &mlx_ptrs);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
