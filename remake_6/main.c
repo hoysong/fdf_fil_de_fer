@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/10 19:32:35 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/11 19:35:21 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -92,16 +92,13 @@ t_mlx_ptrs	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 {
 	char	***splits;
 	int		file_line_count;
-	int		map_chk_flg;
 
 	file_line_count = 0;
 	splits = read_file(fd, &file_line_count); // split with ft_split
 	// splits_to_int(splits); // make int arr from splits
-	map_chk_flg = map_vld_chk(splits); // free splits and map vld chk
-	if (map_chk_flg == 0)
-	{
+//	map_chk_flg = map_vld_chk(splits); // free splits and map vld chk
+	if (map_vld_chk(splits) == 0)
 		err_hdler(IVLD_MAP, mlx_ptrs);
-	}
 	return (0);
 }
 
