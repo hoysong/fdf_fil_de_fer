@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:15:46 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/10 19:31:07 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/11 19:53:50 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -41,7 +41,7 @@ int	***gen_int_arr(int x_elements, int file_line_count)
 	return (arr_3);
 }
 
-static int	count_x_elements(char **splits_one_line)
+int	count_x_elements(char **splits_one_line)
 {
 	int	elements;
 

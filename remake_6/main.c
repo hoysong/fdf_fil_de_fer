@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/11 19:35:21 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/11 20:01:20 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -91,10 +91,12 @@ void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 t_mlx_ptrs	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 {
 	char	***splits;
+	int		***parsed_data;
 	int		file_line_count;
 
 	file_line_count = 0;
 	splits = read_file(fd, &file_line_count); // split with ft_split
+//	parsed_data = splits_to_int(splits, file_line_count);
 	// splits_to_int(splits); // make int arr from splits
 //	map_chk_flg = map_vld_chk(splits); // free splits and map vld chk
 	if (map_vld_chk(splits) == 0)

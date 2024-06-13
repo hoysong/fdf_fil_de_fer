@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/09 18:05:14 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/11 20:00:58 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int			***gen_int_arr(int x_elements, int file_line_count);
 char		***read_file(int fd, int *file_line_count);
 t_dnode		*get_parse_data(int fd);
 void		free_splits(char ***splits);
-int			***splits_to_int(char ***splits);
+int			***splits_to_int(char ***splits, int file_line_count);
+int			***gen_int_arr(int x_elements, int file_line_count);
+int			count_x_elements(char **splits_one_line);
 
 #endif
