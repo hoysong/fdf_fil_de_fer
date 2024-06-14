@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/11 20:01:20 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/13 16:04:16 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -20,24 +20,6 @@ typedef struct s_list_1
 	void	*win_ptr;
 	void	*data;
 }			t_mlx_ptrs;
-
-int	ft_atoi(const char *char_num)
-{
-	int	int_num;
-	int	minus;
-
-	int_num = 0;
-	minus = 1;
-	if (*char_num == '-')
-	{
-		minus = -1;
-		char_num++;
-	}
-	while (*char_num && *char_num >= '0' && *char_num <= '9')
-		int_num = int_num * 10 + *(char *)char_num++ - '0';
-	int_num *= minus;
-	return (int_num);
-}
 
 int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 {

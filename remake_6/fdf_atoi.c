@@ -6,13 +6,13 @@
 /*   By: hoysong <hoysong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 19:21:21 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/08 01:58:38 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/13 16:02:26 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "my_fdf.h"
 
-int	fdf_atoi(const char **nptr)
+int	fdf_atoi(char **nptr)
 {
 	int	intnum;
 	int	minus;

@@ -36,8 +36,7 @@ SRCS = \
 	   get_next_line.c \
 	   ./linked_list/doubly_lkdlist.c \
 	   ./linked_list/doubly_lkdlist_destroy.c \
-	   ./linked_list/singly_lkdlist.c \
-	   fdf_atoi.c
+	   ./linked_list/singly_lkdlist.c
 
 CC = cc
 
