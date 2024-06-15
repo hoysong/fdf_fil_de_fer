@@ -26,7 +26,7 @@ int	***splits_to_int(char ***splits, int file_line_count)
 	{
 		while (splits[thr_dim][sec_dim] != NULL)
 		{
-			splits[thr_dim][sec_dim] 
+//			splits[thr_dim][sec_dim]
 			++sec_dim;
 		}
 		++thr_dim;
