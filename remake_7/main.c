@@ -94,9 +94,9 @@ int	main(int argc, char *argv[])
 	t_mlx_ptrs	mlx_ptrs;
 
 	i = 0;
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
+	if (argc <= 1)
 		err_hdler(OPEN_ERR, 0);
+	fd = open(argv[1], O_RDONLY);
 
 	setup_main(&mlx_ptrs);
 

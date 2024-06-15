@@ -38,5 +38,16 @@ int	***splits_to_int(char ***splits, int file_line_count)
 //2. atoi에 넘겨주기
 //2.1 atoi 에서는 기본적으로 z 값을 트리플 포인터의 0번 인덱스에 넣기.
 //2.2 atoi 에서는 color값을 1번째 인덱스에 넣기.
+
+/*
+	새로운 atoi의 함수 프로토타입은 아래처럼 해준다.
+	fdf_atoi (char **splits, int ****)
+	fdf_atoi를 호출하고 나서의 로직은 아래처럼 해주면 될 것 같다.
+	fdf_atoi (char **splits, int ****)
+	{
+			일반 atoi를 통해 3차원 0번 인덱스에 z값 넣기
+			이후 atoi를 통해 3차원 1번 인덱스에 색상값 넣기
+	}
+*/
 	return (0);
 }
