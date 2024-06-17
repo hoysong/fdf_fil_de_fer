@@ -58,7 +58,7 @@ void debug_parsed_data(int ***parsed_data, int elements, int lines)
 	{
 		while(x < elements)
 		{
-			printf("%X", parsed_data[0][y][x]);
+			printf("%X ", parsed_data[0][y][x]);
 			x++;
 		}
 		printf("\n");
