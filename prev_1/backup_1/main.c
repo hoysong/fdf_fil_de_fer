@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/07 18:14:00 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:36:40 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ int	main(int argc, char *argv[])
 		mlx_destroy_display(mlx_ptrs.init_ptr);
 		free(mlx_ptrs.init_ptr);
 	}
-	mlx_ptrs.pars_data = get_parse_data(fd);
+//	mlx_ptrs.pars_data = get_parse_data(fd);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
 }

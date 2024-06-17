@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/13 16:04:16 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:52:30 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -82,8 +82,8 @@ t_mlx_ptrs	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 	x_elements = count_x_elements((*splits));
 	printf("vert elements: %d\n", x_elements);
 	printf("hriz elements: %d\n", file_line_count);
-	parsed_data = splits_to_int(splits, file_line_count);
-//	free_parse_data(parsed_data, x_elements, file_line_count);
+	parsed_data = splits_to_int(splits, x_elements, file_line_count);
+	free_parse_data(parsed_data, x_elements, file_line_count);
 	if (map_vld_chk(splits) == 0)
 		err_hdler(IVLD_MAP, mlx_ptrs);
 	return (0);

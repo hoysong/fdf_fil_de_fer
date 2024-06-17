@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/13 16:02:36 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:52:21 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			map_vld_chk(char ***splits);
 
 int			***gen_int_arr(int x_elements, int file_line_count);
 void		free_splits(char ***splits);
-int			***splits_to_int(char ***splits, int file_line_count);
+int			***splits_to_int(char ***splits, int x_elements, int file_line_count);
 int			***gen_int_arr(int x_elements, int file_line_count);
 int			count_x_elements(char **splits_one_line);
 void			hex_to_dec(char *num_str, int *height, int *color);

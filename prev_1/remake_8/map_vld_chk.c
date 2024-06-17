@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   call_atoi.c                                        :+:      :+:    :+:   */
+/*   map_vld_chk.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:15:46 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/11 19:53:50 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/17 18:12:16 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -19,25 +19,21 @@ int	***gen_int_arr(int x_elements, int file_line_count)
 	int	second;
 
 	arr_3 = (int ***)malloc(sizeof(int **) * 3);
-	arr_3[2] = NULL;
 	third = 0;
 	second = 0;
-	while (third < 3) // gen **arr
+
+	while (third < 2) // gen **arr
 	{
-		arr_3[third] = (int **)malloc(sizeof(int *) * (file_line_count + 1));
-		if (arr_3[third] == NULL)
-			return (0);
-		arr_3[third][file_line_count] = NULL;
+		arr_3[third] = (int **)malloc(sizeof(int *) * (file_line_count));
 		while (second < file_line_count)
 		{
 			arr_3[third][second] = (int *)malloc(sizeof(int) * (x_elements));
-			if (arr_3[third][second] == NULL)
-				return (0);
 			second++;
 		}
 		second = 0;
 		third++;
 	}
+
 	return (arr_3);
 }
 

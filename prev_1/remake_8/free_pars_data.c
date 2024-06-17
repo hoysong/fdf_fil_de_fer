@@ -9,8 +9,7 @@ void	free_parse_data(int ***data, int elements, int lines)
 	thrd = 0;
 	frst = 0;
 	scnd = 0;
-	free(data[2]); // free NULL 3rd dim
-	while (thrd <= 2)
+	while (thrd < 2)
 	{
 		while (scnd < lines)
 		{
@@ -21,4 +20,6 @@ void	free_parse_data(int ***data, int elements, int lines)
 			scnd = 0;
 			thrd++;
 	}
+	//free(data[2]); // free NULL 3rd dim
+	free(data);
 }
