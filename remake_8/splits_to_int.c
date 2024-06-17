@@ -56,5 +56,5 @@ int	***splits_to_int(char ***splits, int file_line_count)
 		printf("color value\n");
 	}
 	/* =====chk end===== */
-	return (0);
+	return (parsed_data);
 }

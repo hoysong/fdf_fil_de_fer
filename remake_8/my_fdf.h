@@ -36,5 +36,6 @@ int			count_x_elements(char **splits_one_line);
 void			hex_to_dec(char *num_str, int *height, int *color);
 int			fdf_atoi(char **nptr);
 char		***get_splits(int fd, int *file_line_count);
+void	free_parse_data(int ***data, int elements, int lines);
 
 #endif
