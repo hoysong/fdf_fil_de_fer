@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/17 21:39:05 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/20 20:45:58 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -18,7 +18,7 @@ typedef struct s_list_1
 {
 	void	*init_ptr;
 	void	*win_ptr;
-	void	*data;
+	t_prs_info	*data;
 }			t_mlx_ptrs;
 
 int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
@@ -34,7 +34,11 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 	return (0);
 }
 
-static void	setup_main(t_mlx_ptrs *mlx_ptrs)
+//static void get_win_size(s_parse_info *prs_data, int *vert, int *horiz)
+//{
+//}
+
+static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 {
 	mlx_ptrs->init_ptr = mlx_init();
 	if (mlx_ptrs->init_ptr == 0)
@@ -62,6 +66,7 @@ void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 	}
 	else if (err_num == IVLD_MAP)
 	{
+		free_parse_data(mlx_ptrs->data->int_arr, mlx_ptrs->data->horiz, mlx_ptrs->data->vert);
 		write(1, "[err code: 3] ivld_map\n", 23);
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
 		mlx_destroy_display(mlx_ptrs->init_ptr);
@@ -70,35 +75,33 @@ void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 	}
 }
 
-t_mlx_ptrs	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
+t_prs_info	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 {
-	char	***splits;
-	int		***parsed_data;
-	int		file_line_count;
-	int		x_elements;
+	t_prs_info	*prs_data;
 
-	file_line_count = 0;
-	splits = get_splits(fd, &file_line_count); // split with ft_split
-	//debug_splits(splits);
+	prs_data = malloc(sizeof(t_prs_info));
+	if (prs_data == 0)
+		return (0);
 
-	x_elements = count_x_elements((*splits));
+	prs_data->vert = 0;
+	prs_data->splits = get_splits(fd, &prs_data->vert); // split with ft_split
+	//debug_splits(prs_data->splits);
+
+	prs_data->horiz = count_x_elements((*prs_data->splits));
 	/*=== debug ===*/
-	printf("vert elements: %d\n", x_elements);
-	printf("hriz elements: %d\n", file_line_count);
-	parsed_data = splits_to_int(splits, x_elements, file_line_count);
-	//debug_parsed_data(parsed_data, x_elements, file_line_count);
+	printf("vert elements: %d\n", prs_data->horiz);
+	printf("hriz elements: %d\n", prs_data->vert);
+	prs_data->int_arr = splits_to_int(prs_data->splits, prs_data->horiz, prs_data->vert);
+	//debug_parsed_data(prs_data->int_arr, prs_data->horiz, prs_data->vert);
 
-	free_parse_data(parsed_data, x_elements, file_line_count);
-	if (map_vld_chk(splits) == 0)
-		err_hdler(IVLD_MAP, mlx_ptrs);
-	return (0);
+	return (prs_data);
 }
 
 int	main(int argc, char *argv[])
 {
-	int			fd;
-	int			i;
-	char		**str;
+	int		fd;
+	int		i;
+	char	**str;
 	t_mlx_ptrs	mlx_ptrs;
 
 	i = 0;
@@ -106,10 +109,14 @@ int	main(int argc, char *argv[])
 		err_hdler(OPEN_ERR, 0);
 	fd = open(argv[1], O_RDONLY);
 
-	setup_main(&mlx_ptrs);
-
-	mlx_ptrs.data = 0;
 	mlx_ptrs.data = get_parsed_data(fd, &mlx_ptrs);
+
+	setup_mlx(&mlx_ptrs);
+	if (map_vld_chk((mlx_ptrs.data)->splits) == 0)
+		err_hdler(IVLD_MAP, &mlx_ptrs);
+		free_parse_data(mlx_ptrs.data->int_arr, mlx_ptrs.data->horiz, mlx_ptrs.data->vert);
+		free(mlx_ptrs.data);
+
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
 }

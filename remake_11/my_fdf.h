@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/17 19:58:29 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/20 20:28:19 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 # include "my_libft/linked_list/lkdlist.h"
 # include "my_libft/libft.h"
 
+typedef struct s_parse_info
+{
+	int		vert;
+	int		horiz;
+	int 	height;
+	char	***splits;
+	int		***int_arr;
+} t_prs_info;
 
 static void	setup_call_atoi(int *second_index, int *x_elements, char ****free_splits, char ***splits);
 int			map_vld_chk(char ***splits);
