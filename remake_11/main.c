@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/21 19:58:56 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/23 01:29:59 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -66,7 +66,7 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	}
 }
 
-// ===================================================================================
+// =================================================================================
 
 void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 {
@@ -96,13 +96,13 @@ t_prs_info	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 		return (0);
 	prs_data->vert = 0;
 	prs_data->splits = get_splits(fd, &prs_data->vert); // split with ft_split
-	//debug_splits(prs_data->splits);
+//	debug_splits(prs_data->splits);
 	prs_data->horiz = count_x_elements((*prs_data->splits));
 	/*=== debug ===*/
 	printf("vert elements: %d\n", prs_data->horiz);
 	printf("hriz elements: %d\n", prs_data->vert);
 	prs_data->int_arr = splits_to_int(prs_data->splits, prs_data->horiz, prs_data->vert);
-	//debug_parsed_data(prs_data->int_arr, prs_data->horiz, prs_data->vert);
+//	debug_parsed_data(prs_data->int_arr, prs_data->horiz, prs_data->vert);
 	return (prs_data);
 }
 
@@ -120,8 +120,8 @@ int	main(int argc, char *argv[])
 	mlx_ptrs.data = get_parsed_data(fd, &mlx_ptrs);
 	if (map_vld_chk((mlx_ptrs.data)->splits) == 0)
 		err_hdler(IVLD_MAP, &mlx_ptrs);
-//	free_parse_data(mlx_ptrs.data->int_arr, mlx_ptrs.data->horiz, mlx_ptrs.data->vert);
-//	free(mlx_ptrs.data);
+	free_parse_data(mlx_ptrs.data->int_arr, mlx_ptrs.data->horiz, mlx_ptrs.data->vert);
+	free(mlx_ptrs.data);
 	setup_mlx(&mlx_ptrs);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
