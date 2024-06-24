@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/23 01:29:59 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:23:22 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -17,7 +17,8 @@
 typedef struct s_img_struct
 {
 	void	*img_ptr;
-	int		bits_ptr_pixel;
+	void	*addr;
+	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
 }	t_img_strc;
@@ -35,8 +36,12 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 	printf("input: %d\n", input);
 	if (input == XK_Escape)
 	{
+		mlx_destroy_image(mlx_ptrs->init_ptr, (mlx_ptrs->img_data)->img_ptr);
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
 		mlx_destroy_display(mlx_ptrs->init_ptr);
+		free_parse_data(mlx_ptrs->data->int_arr, mlx_ptrs->data->horiz, mlx_ptrs->data->vert);
+		free(mlx_ptrs->data);
+		free(mlx_ptrs->img_data);
 		free(mlx_ptrs->init_ptr);
 		exit(1);
 	}
@@ -49,6 +54,8 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 
 static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 {
+	t_img_strc	*img_strc;
+	img_strc = malloc(sizeof(t_img_strc));
 	/* === init_mlx === */
 	mlx_ptrs->init_ptr = mlx_init();
 	if (mlx_ptrs->init_ptr == 0)
@@ -64,6 +71,14 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 		mlx_destroy_display(mlx_ptrs->init_ptr);
 		free(mlx_ptrs->init_ptr);
 	}
+		/* == new_image ==*/
+	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 500, 500);
+	img_strc->addr = mlx_get_data_addr(mlx_ptrs->init_ptr, &img_strc->bits_per_pixel, &img_strc->size_line, &img_strc->endian);
+	mlx_ptrs->img_data = img_strc;
+//	printf("test_num: %d\n", img_strc.test_num);
+//	printf("test_addr: %p\n", mlx_ptrs->img_data->addr);
+//	printf("test_bits: %d\n", mlx_ptrs->img_data->bits_per_pixel);
+//	printf("test_size_line: %d\n", mlx_ptrs->img_data->size_line);
 }
 
 // =================================================================================
@@ -120,8 +135,6 @@ int	main(int argc, char *argv[])
 	mlx_ptrs.data = get_parsed_data(fd, &mlx_ptrs);
 	if (map_vld_chk((mlx_ptrs.data)->splits) == 0)
 		err_hdler(IVLD_MAP, &mlx_ptrs);
-	free_parse_data(mlx_ptrs.data->int_arr, mlx_ptrs.data->horiz, mlx_ptrs.data->vert);
-	free(mlx_ptrs.data);
 	setup_mlx(&mlx_ptrs);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_loop(mlx_ptrs.init_ptr);
