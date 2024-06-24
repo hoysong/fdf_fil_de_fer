@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/24 16:23:22 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:25:50 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -75,10 +75,6 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 500, 500);
 	img_strc->addr = mlx_get_data_addr(mlx_ptrs->init_ptr, &img_strc->bits_per_pixel, &img_strc->size_line, &img_strc->endian);
 	mlx_ptrs->img_data = img_strc;
-//	printf("test_num: %d\n", img_strc.test_num);
-//	printf("test_addr: %p\n", mlx_ptrs->img_data->addr);
-//	printf("test_bits: %d\n", mlx_ptrs->img_data->bits_per_pixel);
-//	printf("test_size_line: %d\n", mlx_ptrs->img_data->size_line);
 }
 
 // =================================================================================
