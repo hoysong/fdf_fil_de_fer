@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/24 16:25:50 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/24 18:28:56 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -91,9 +91,6 @@ void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 		free_parse_data(mlx_ptrs->data->int_arr, mlx_ptrs->data->horiz, mlx_ptrs->data->vert);
 		free(mlx_ptrs->data);
 		write(1, "[err code: 3] ivld_map\n", 23);
-//		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
-//		mlx_destroy_display(mlx_ptrs->init_ptr);
-//		free(mlx_ptrs->init_ptr);
 		exit(1);
 	}
 }
