@@ -6,30 +6,13 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/24 18:28:56 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/27 14:16:19 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
 #define OPEN_ERR		1
 #define FILE_NAME_ERR	2
 #define IVLD_MAP		3
-
-typedef struct s_img_struct
-{
-	void	*img_ptr;
-	void	*addr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_img_strc;
-
-typedef struct s_mlx_struct
-{
-	void	*init_ptr;
-	void	*win_ptr;
-	t_prs_info	*data;
-	t_img_strc	*img_data;
-}			t_mlx_ptrs;
 
 int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 {
@@ -55,6 +38,7 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 {
 	t_img_strc	*img_strc;
+
 	img_strc = malloc(sizeof(t_img_strc));
 	/* === init_mlx === */
 	mlx_ptrs->init_ptr = mlx_init();
@@ -71,9 +55,12 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 		mlx_destroy_display(mlx_ptrs->init_ptr);
 		free(mlx_ptrs->init_ptr);
 	}
-		/* == new_image ==*/
+	/* == new_image ==*/
+//	printf("addr: %p\n", img_strc->addr);
 	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 500, 500);
-	img_strc->addr = mlx_get_data_addr(mlx_ptrs->init_ptr, &img_strc->bits_per_pixel, &img_strc->size_line, &img_strc->endian);
+	img_strc->addr = mlx_get_data_addr(img_strc->img_ptr, &img_strc->bits_per_pixel, &img_strc->size_line, &(img_strc->endian));
+	printf("%d\n", img_strc->endian);
+	printf("addr: %p\n", img_strc->addr);
 	mlx_ptrs->img_data = img_strc;
 }
 
@@ -117,11 +104,9 @@ t_prs_info	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 int	main(int argc, char *argv[])
 {
 	int			fd;
-	int			i;
 	char		**str;
 	t_mlx_ptrs	mlx_ptrs;
 
-	i = 0;
 	if (argc <= 1)
 		err_hdler(OPEN_ERR, 0);
 	fd = open(argv[1], O_RDONLY);
@@ -129,6 +114,16 @@ int	main(int argc, char *argv[])
 	if (map_vld_chk((mlx_ptrs.data)->splits) == 0)
 		err_hdler(IVLD_MAP, &mlx_ptrs);
 	setup_mlx(&mlx_ptrs);
+//	put_image(300, 300, &mlx_ptrs, 0xffffff);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
+
+	int			i;
+	i = 0;
+	while (i < 500)
+	{
+		my_mlx_pixel_put(&mlx_ptrs, i, 100, 0xffffff);
+		i++;
+	}
+	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
