@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/27 13:43:57 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/27 17:43:17 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_mlx_struct
 {
 	void	*init_ptr;
 	void	*win_ptr;
+	int		gap;
 	t_prs_info	*data;
 	t_img_strc	*img_data;
 }			t_mlx_ptrs;
@@ -68,5 +69,7 @@ void	debug_lkd_list(t_dnode *gnl_node);
 void debug_parsed_data(int ***parsed_data, int elements, int lines);
 //void	put_image(int x, int y, t_mlx_ptrs *l, int color);
 void  my_mlx_pixel_put(t_mlx_ptrs *data, int x, int y, int color);
+void	qter_view(int point_x, int point_y, t_mlx_ptrs *mlx_ptrs);
+void	make_trigon(t_mlx_ptrs *mlx_ptrs);
 
 #endif

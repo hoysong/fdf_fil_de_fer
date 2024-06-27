@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/27 14:16:19 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/27 19:26:18 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -40,6 +40,7 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	t_img_strc	*img_strc;
 
 	img_strc = malloc(sizeof(t_img_strc));
+	mlx_ptrs->gap = 10;
 	/* === init_mlx === */
 	mlx_ptrs->init_ptr = mlx_init();
 	if (mlx_ptrs->init_ptr == 0)
@@ -48,7 +49,7 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 		free(mlx_ptrs->init_ptr);
 	}
 	/* === gen win ptr === */
-	mlx_ptrs->win_ptr = mlx_new_window(mlx_ptrs->init_ptr, 500, 500, "window_1");
+	mlx_ptrs->win_ptr = mlx_new_window(mlx_ptrs->init_ptr, 1000, 1000, "window_1");
 	if (mlx_ptrs->win_ptr == 0)
 	{
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
@@ -57,7 +58,7 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	}
 	/* == new_image ==*/
 //	printf("addr: %p\n", img_strc->addr);
-	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 500, 500);
+	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 1000, 1000);
 	img_strc->addr = mlx_get_data_addr(img_strc->img_ptr, &img_strc->bits_per_pixel, &img_strc->size_line, &(img_strc->endian));
 	printf("%d\n", img_strc->endian);
 	printf("addr: %p\n", img_strc->addr);
@@ -114,16 +115,16 @@ int	main(int argc, char *argv[])
 	if (map_vld_chk((mlx_ptrs.data)->splits) == 0)
 		err_hdler(IVLD_MAP, &mlx_ptrs);
 	setup_mlx(&mlx_ptrs);
-//	put_image(300, 300, &mlx_ptrs, 0xffffff);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 
 	int			i;
 	i = 0;
-	while (i < 500)
-	{
-		my_mlx_pixel_put(&mlx_ptrs, i, 100, 0xffffff);
-		i++;
-	}
+//	while (i < 500)
+//	{
+//		my_mlx_pixel_put(&mlx_ptrs, i, 100, 0xffffff);
+//		i++;
+//	}
+	make_trigon(&mlx_ptrs);
 	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
