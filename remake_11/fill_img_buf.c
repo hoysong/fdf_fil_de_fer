@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 11:58:31 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/27 19:25:43 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/29 01:24:27 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	make_trigon(t_mlx_ptrs *mlx_ptrs)
 	int	***pars_arr;
 	int gap;
 	x = 0;
+	y = 0;
 	gap = 10;
 //	x = mlx_ptrs->data->vert;
 //	y = mlx_ptrs->data->height;
