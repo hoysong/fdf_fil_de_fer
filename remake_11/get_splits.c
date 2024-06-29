@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/23 00:25:08 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/29 23:37:19 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -53,7 +53,7 @@ static t_dnode *read_with_gnl(int fd, int *file_line_count)
 			break ;
 	}
 	(*file_line_count)--;
-	//debug_lkd_list(node_head->next_node);
+	debug_lkd_list(node_head->next_node);
 	return (node_head);
 }
 

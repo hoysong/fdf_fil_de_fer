@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/27 19:26:18 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/30 01:45:41 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -19,9 +19,11 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 	printf("input: %d\n", input);
 	if (input == XK_Escape)
 	{
+	debug_point_arr(mlx_ptrs);
 		mlx_destroy_image(mlx_ptrs->init_ptr, (mlx_ptrs->img_data)->img_ptr);
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
 		mlx_destroy_display(mlx_ptrs->init_ptr);
+//		free_point_arr(mlx_ptrs);
 		free_parse_data(mlx_ptrs->data->int_arr, mlx_ptrs->data->horiz, mlx_ptrs->data->vert);
 		free(mlx_ptrs->data);
 		free(mlx_ptrs->img_data);
@@ -58,7 +60,7 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	}
 	/* == new_image ==*/
 //	printf("addr: %p\n", img_strc->addr);
-	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 1000, 1000);
+	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 500, 500);
 	img_strc->addr = mlx_get_data_addr(img_strc->img_ptr, &img_strc->bits_per_pixel, &img_strc->size_line, &(img_strc->endian));
 	printf("%d\n", img_strc->endian);
 	printf("addr: %p\n", img_strc->addr);
@@ -92,13 +94,15 @@ t_prs_info	*get_parsed_data(int fd, t_mlx_ptrs *mlx_ptrs)
 		return (0);
 	prs_data->vert = 0;
 	prs_data->splits = get_splits(fd, &prs_data->vert); // split with ft_split
-//	debug_splits(prs_data->splits);
+	debug_splits(prs_data->splits);
 	prs_data->horiz = count_x_elements((*prs_data->splits));
 	/*=== debug ===*/
 	printf("vert elements: %d\n", prs_data->horiz);
 	printf("hriz elements: %d\n", prs_data->vert);
 	prs_data->int_arr = splits_to_int(prs_data->splits, prs_data->horiz, prs_data->vert);
-//	debug_parsed_data(prs_data->int_arr, prs_data->horiz, prs_data->vert);
+	mlx_ptrs->data = prs_data;
+	mlx_ptrs->data->point = int_to_point(mlx_ptrs);
+	debug_parsed_data(prs_data->int_arr, prs_data->horiz, prs_data->vert);
 	return (prs_data);
 }
 
@@ -125,6 +129,6 @@ int	main(int argc, char *argv[])
 //		i++;
 //	}
 	make_trigon(&mlx_ptrs);
-	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
+	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 100, 100);
 	mlx_loop(mlx_ptrs.init_ptr);
 }

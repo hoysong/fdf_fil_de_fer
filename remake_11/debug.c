@@ -66,3 +66,26 @@ void debug_parsed_data(int ***parsed_data, int elements, int lines)
 		y++;
 	}
 }
+
+void	debug_point_arr(t_mlx_ptrs *mlx_ptrs)
+{
+	t_point	**point_arr;
+	int	height;
+	int	width;
+
+	height = 0;
+	width = 0;
+	point_arr = mlx_ptrs->data->point;
+	printf("========= print point_arr =========\n");
+	while(height < mlx_ptrs->data->vert)
+	{
+		while(width < mlx_ptrs->data->horiz)
+		{
+			printf("%d", point_arr[height][width].x);
+			width ++;
+		}
+		printf("\n");
+		width = 0;
+		height++;
+	}
+}

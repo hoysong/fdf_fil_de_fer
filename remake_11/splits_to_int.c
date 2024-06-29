@@ -6,10 +6,36 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 18:03:43 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/20 18:37:28 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/29 01:46:24 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
+
+int	***gen_int_arr(int x_elements, int file_line_count)
+{
+	printf("gen int arr...\n");
+	int	***arr_3;
+	int	third;
+	int	second;
+
+	arr_3 = (int ***)malloc(sizeof(int **) * 4);
+	third = 0;
+	second = 0;
+
+	while (third < 3)
+	{
+		arr_3[third] = (int **)malloc(sizeof(int *) * (file_line_count));
+		while (second < file_line_count)
+		{
+			arr_3[third][second] = (int *)malloc(sizeof(int) * (x_elements));
+			second++;
+		}
+		second = 0;
+		third++;
+	}
+
+	return (arr_3);
+}
 
 int	***splits_to_int(char ***splits, int x_elements, int file_line_count)
 {

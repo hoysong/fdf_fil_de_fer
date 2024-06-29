@@ -6,36 +6,10 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:15:46 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/17 21:38:23 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/29 01:43:09 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
-
-int	***gen_int_arr(int x_elements, int file_line_count)
-{
-	printf("gen int arr...\n");
-	int	***arr_3;
-	int	third;
-	int	second;
-
-	arr_3 = (int ***)malloc(sizeof(int **) * 3);
-	third = 0;
-	second = 0;
-
-	while (third < 2)
-	{
-		arr_3[third] = (int **)malloc(sizeof(int *) * (file_line_count));
-		while (second < file_line_count)
-		{
-			arr_3[third][second] = (int *)malloc(sizeof(int) * (x_elements));
-			second++;
-		}
-		second = 0;
-		third++;
-	}
-
-	return (arr_3);
-}
 
 // count unitl splits_one_line is not NULL
 // and go back 1 byte to check it is newlin

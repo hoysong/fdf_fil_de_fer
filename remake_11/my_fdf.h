@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/27 17:43:17 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/06/30 01:30:27 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 # include "my_libft/linked_list/lkdlist.h"
 # include "my_libft/libft.h"
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int	*z;
+	int	*color;
+} t_point;
+
 typedef struct s_parse_info
 {
 	int		vert;
@@ -31,6 +39,7 @@ typedef struct s_parse_info
 	int 	height;
 	char	***splits;
 	int		***int_arr;
+	t_point	**point;
 } t_prs_info;
 
 typedef struct s_img_struct
@@ -67,9 +76,12 @@ void	free_parse_data(int ***data, int elements, int lines);
 void	debug_splits(char ***splits);
 void	debug_lkd_list(t_dnode *gnl_node);
 void debug_parsed_data(int ***parsed_data, int elements, int lines);
+void	debug_point_arr(t_mlx_ptrs *mlx_ptrs);
 //void	put_image(int x, int y, t_mlx_ptrs *l, int color);
 void  my_mlx_pixel_put(t_mlx_ptrs *data, int x, int y, int color);
-void	qter_view(int point_x, int point_y, t_mlx_ptrs *mlx_ptrs);
+//void	qter_view(int point_x, int point_y, t_mlx_ptrs *mlx_ptrs);
 void	make_trigon(t_mlx_ptrs *mlx_ptrs);
+t_point	**int_to_point(t_mlx_ptrs *mlx_ptrs);
+void	free_point_arr(t_mlx_ptrs *mlx_ptrs);
 
 #endif
