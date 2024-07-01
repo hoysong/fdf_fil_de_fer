@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:36:32 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/30 01:44:38 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/02 00:11:29 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	insert_int_to_point_arr(t_mlx_ptrs *mlx_ptrs)
 	}
 	printf("inner\n");
 	debug_point_arr(mlx_ptrs);
-//	free_point_arr(mlx_ptrs);
+	free_point_arr(mlx_ptrs);
 }
 
 static t_point	**make_point_arr(t_mlx_ptrs	*mlx_ptrs)
@@ -88,7 +88,7 @@ t_point	**int_to_point(t_mlx_ptrs *mlx_ptrs)
 	mlx_ptrs->data->point = make_point_arr(mlx_ptrs);
 	insert_int_to_point_arr(mlx_ptrs);
 	printf("\nout\n");
-	debug_point_arr(mlx_ptrs);
+//	debug_point_arr(mlx_ptrs);
 
 	return (point_arr);
 }
