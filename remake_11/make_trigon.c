@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_img_buf.c                                     :+:      :+:    :+:   */
+/*   make_trigon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 11:58:31 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/29 17:51:50 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/03 07:37:20 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,7 @@ void  my_mlx_pixel_put(t_mlx_ptrs *data, int x, int y, int color)
 
 void make_gap(t_mlx_ptrs *mlx_ptrs)
 {
-	t_prs_info *prs_info;
-	int	y;
-	int	x;
-	prs_info = mlx_ptrs->data;
-	x = 0;
-	y = 0;
-	while (y < prs_info->horiz )
-	{
-		x = 0;
-		while (x < prs_info->vert)
-		{
-			prs_info->int_arr[2][y][x] = x * 10;
-			prs_info->int_arr[2][y][x] = y * 10;
-			prs_info->int_arr[2][y][x] = x * 10;
-			//(var->offset[y][x]).x = x * var->gap;
-			//(var->offset[y][x]).y = y * var->gap;
-			//(var->offset[y][x]).z = var->map[y][x];
-			x++;
-		}
-		y++;
-	}
+	return ;
 }
 
 void	make_trigon(t_mlx_ptrs *mlx_ptrs)

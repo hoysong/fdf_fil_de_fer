@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 01:16:38 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/30 01:18:42 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/03 07:30:25 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,20 @@ void	free_parse_data(int ***data, int elements, int lines)
 	free(data);
 }
 
+void	free_point_arr(t_mlx_ptrs *mlx_ptrs)
+{
+	t_point	**point_arr;
+	int	width;
+	int	height;
+
+	width = 0;
+	height = 0;
+	point_arr = mlx_ptrs->data->point;
+
+	while (height < mlx_ptrs->data->vert)
+	{
+		free(point_arr[height]);
+		height++;
+	}
+	free(point_arr);
+}

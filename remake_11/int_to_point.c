@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_point_arr.c                                   :+:      :+:    :+:   */
+/*   int_to_point.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:36:32 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/02 00:11:29 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/03 07:31:39 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
-
-void	free_point_arr(t_mlx_ptrs *mlx_ptrs)
-{
-	t_point	**point_arr;
-	int	width;
-	int	height;
-
-	width = 0;
-	height = 0;
-	point_arr = mlx_ptrs->data->point;
-
-	while (height < mlx_ptrs->data->vert)
-	{
-		free(point_arr[height]);
-		height++;
-	}
-	free(point_arr);
-}
 
 static void	insert_int_to_point_arr(t_mlx_ptrs *mlx_ptrs)
 {
@@ -56,7 +38,7 @@ static void	insert_int_to_point_arr(t_mlx_ptrs *mlx_ptrs)
 	}
 	printf("inner\n");
 	debug_point_arr(mlx_ptrs);
-	free_point_arr(mlx_ptrs);
+//	free_point_arr(mlx_ptrs);
 }
 
 static t_point	**make_point_arr(t_mlx_ptrs	*mlx_ptrs)
@@ -81,14 +63,11 @@ static t_point	**make_point_arr(t_mlx_ptrs	*mlx_ptrs)
 	return (point_arr);
 }
 
-t_point	**int_to_point(t_mlx_ptrs *mlx_ptrs)
+void	int_to_point(t_mlx_ptrs *mlx_ptrs)
 {
-	t_point	**point_arr;
-
 	mlx_ptrs->data->point = make_point_arr(mlx_ptrs);
 	insert_int_to_point_arr(mlx_ptrs);
 	printf("\nout\n");
 //	debug_point_arr(mlx_ptrs);
-
-	return (point_arr);
+	return ;
 }

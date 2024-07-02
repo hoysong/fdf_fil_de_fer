@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/30 01:30:27 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/03 06:58:42 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	debug_point_arr(t_mlx_ptrs *mlx_ptrs);
 void  my_mlx_pixel_put(t_mlx_ptrs *data, int x, int y, int color);
 //void	qter_view(int point_x, int point_y, t_mlx_ptrs *mlx_ptrs);
 void	make_trigon(t_mlx_ptrs *mlx_ptrs);
-t_point	**int_to_point(t_mlx_ptrs *mlx_ptrs);
+void	int_to_point(t_mlx_ptrs *mlx_ptrs);
 void	free_point_arr(t_mlx_ptrs *mlx_ptrs);
 
 #endif
