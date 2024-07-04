@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 11:58:31 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/04 03:27:28 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:09:16 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	make_gap(t_prs_info *prs_info)
 		{
 			prs_info->point[y][x].x = x * gap;
 			prs_info->point[y][x].y = y * gap;
-			prs_info->point[y][x].z = prs_info->int_arr[y][x];
+			prs_info->point[y][x].z = &(prs_info->int_arr[0][y][x]);
 			x++;
 		}
 		x = 0;
@@ -61,7 +61,7 @@ void	make_trigon(t_mlx_ptrs *mlx_ptrs)
 		while(y < mlx_ptrs->data->horiz)
 		{
 //			qter_view(x, y, mlx_ptrs);
-			my_mlx_pixel_put(mlx_ptrs, x, y, 0xffffff);
+			my_mlx_pixel_put(mlx_ptrs, mlx_ptrs->data->point[y][x].x, mlx_ptrs->data->point[y][x].y, 0xffffff);
 			y++;
 		}
 		y = 0;
