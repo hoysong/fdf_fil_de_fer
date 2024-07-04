@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 14:25:34 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/13 17:48:10 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:41:53 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	hex_to_dec(char *num_str, int *height, int *color)
 			int_value = (int_value * 16) + (*num_str - 55);
 		++num_str;
 	}
-	*color = int_value;
+	if (int_value == 0)
+		*color = 0xFFFFFF;
+	else
+		*color = int_value;
 	return ;
 }
