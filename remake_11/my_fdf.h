@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/04 18:14:09 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/04 22:40:48 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "minilibx-linux/mlx.h"
 # include "my_libft/linked_list/lkdlist.h"
 # include "my_libft/libft.h"
+# include <math.h>
 
 typedef struct s_point
 {
@@ -60,6 +61,12 @@ typedef struct s_mlx_struct
 	t_img_strc	*img_data;
 }			t_mlx_ptrs;
 
+typedef struct s_move_point
+{
+	int	mv_x;
+	int	mv_y;
+}	t_mv;
+
 static void	setup_call_atoi(int *second_index, int *x_elements, char ****free_splits, char ***splits);
 int			map_vld_chk(char ***splits);
 
@@ -83,5 +90,6 @@ void	debug_point_arr(t_mlx_ptrs *mlx_ptrs);
 void	make_trigon(t_mlx_ptrs *mlx_ptrs);
 void	int_to_point(t_mlx_ptrs *mlx_ptrs);
 void	free_point_arr(t_mlx_ptrs *mlx_ptrs);
+void	rotate_points(t_mlx_ptrs *mlx_ptrs);
 
 #endif

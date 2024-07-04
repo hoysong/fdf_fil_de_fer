@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/03 07:26:38 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/04 19:48:47 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -60,7 +60,7 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	}
 	/* == new_image ==*/
 //	printf("addr: %p\n", img_strc->addr);
-	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 500, 500);
+	img_strc->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 1000, 1000);
 	img_strc->addr = mlx_get_data_addr(img_strc->img_ptr, &img_strc->bits_per_pixel, &img_strc->size_line, &(img_strc->endian));
 	printf("%d\n", img_strc->endian);
 	printf("addr: %p\n", img_strc->addr);
@@ -130,6 +130,6 @@ int	main(int argc, char *argv[])
 //	}
 	make_trigon(&mlx_ptrs);
 	debug_point_arr(&mlx_ptrs);
-	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 100, 100);
+	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
