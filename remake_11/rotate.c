@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:53 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/04 23:27:52 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/04 23:34:23 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void	rotate_points(t_mlx_ptrs *mlx_ptrs)
 		}
 		y++;
 	}
-	mv_points(mlx_ptrs, get_lower(&(point[x][y]), 1));
+	mv_points(mlx_ptrs, get_lower(&(point[1][1]), 1));
 	debug_point_arr(mlx_ptrs);
 }
