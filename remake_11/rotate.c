@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:53 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/04 23:34:23 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/04 23:42:39 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static void	mv_points(t_mlx_ptrs *mlx_ptrs, t_mv mv)
 		x = 0;
 		while(x < mlx_ptrs->data->horiz)
 		{
-			point[y][x].x += 80;
+			point[y][x].x += (mv.mv_x * -1);
+			point[y][x].y += (mv.mv_y * -1);
 			x++;
 		}
 		y++;

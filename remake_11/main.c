@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/04 19:48:47 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/04 23:41:21 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -121,13 +121,6 @@ int	main(int argc, char *argv[])
 	setup_mlx(&mlx_ptrs);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 
-	int			i;
-	i = 0;
-//	while (i < 500)
-//	{
-//		my_mlx_pixel_put(&mlx_ptrs, i, 100, 0xffffff);
-//		i++;
-//	}
 	make_trigon(&mlx_ptrs);
 	debug_point_arr(&mlx_ptrs);
 	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
