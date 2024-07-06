@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/06 19:29:34 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/06 23:15:08 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_parse_data
 {
 	int		vert;
 	int		horiz;
-	int 	height;
+	int		file_lines;
 	char	***splits;
 	int		***int_arr;
 	t_dnode	*gnl_node;
