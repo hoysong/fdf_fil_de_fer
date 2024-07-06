@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/06 20:20:04 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/06 20:24:49 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -21,6 +21,7 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 	{
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
 		mlx_destroy_display(mlx_ptrs->init_ptr);
+		destroy_doubly_list(mlx_ptrs->prs_data->gnl_node);
 		free(mlx_ptrs->prs_data);
 		free(mlx_ptrs->init_ptr);
 		exit(1);

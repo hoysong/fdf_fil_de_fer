@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/06 20:21:51 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/06 20:25:02 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data)
 		return (0);
 	t_dnode	*gnlgnl;
 	prs_data->gnl_node = read_file_with_gnl(fd);
-	destroy_doubly_list(prs_data->gnl_node);
 	return (prs_data);
 }
