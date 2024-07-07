@@ -6,15 +6,33 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/07 14:11:23 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/07 14:35:43 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
 
-//static void	free_splits(char ***splits)
-//{
-//}
+static void	free_splits(char ***splits)
+{
+	char ***tri_ptr;
+	int	i;
+
+	i = 0;
+	tri_ptr = splits;
+	while ((*splits))
+	{
+		while ((*splits)[i])
+		{
+			free((*splits)[i]);
+			++i;
+		}
+		free((*splits)[i]);
+		free(*splits);
+		++splits;
+		i = 0;
+	}
+	free(tri_ptr);
+}
 
 static char	***split_gnl_node(t_prs_data *prs_data, t_dnode *gnl_node)
 {
@@ -24,6 +42,7 @@ static char	***split_gnl_node(t_prs_data *prs_data, t_dnode *gnl_node)
 	splits = (char ***)malloc(sizeof(char **) * (prs_data->file_lines + 1));
 	if (splits == 0)
 		return (0);
+	splits[prs_data->file_lines] = NULL;
 	i = 0;
 	gnl_node = gnl_node->next_node;
 	while(i < (prs_data->file_lines))
@@ -34,6 +53,7 @@ static char	***split_gnl_node(t_prs_data *prs_data, t_dnode *gnl_node)
 		++i;
 	}
 	printf("make splits: %d\n", i);
+	free_splits(splits);
 	return (splits);
 }
 
