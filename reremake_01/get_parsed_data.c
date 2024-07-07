@@ -6,16 +6,36 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/07 00:04:53 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/07 14:11:23 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_fdf.h"
 
-//static char	**split_gnl_node(t_dnode *gnl_node)
+//static void	free_splits(char ***splits)
 //{
-//	return ();
 //}
+
+static char	***split_gnl_node(t_prs_data *prs_data, t_dnode *gnl_node)
+{
+	int		i;
+	char	***splits;
+
+	splits = (char ***)malloc(sizeof(char **) * (prs_data->file_lines + 1));
+	if (splits == 0)
+		return (0);
+	i = 0;
+	gnl_node = gnl_node->next_node;
+	while(i < (prs_data->file_lines))
+	{
+		splits[i] = ft_split((char *)gnl_node->data, ' ');
+		gnl_node = gnl_node->next_node;
+		printf("%s\n", *(splits[i]));
+		++i;
+	}
+	printf("make splits: %d\n", i);
+	return (splits);
+}
 
 static t_dnode *read_file_with_gnl(int fd, t_prs_data *prs_data)
 {
@@ -43,5 +63,6 @@ t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data)
 	if (prs_data == NULL)
 		return (0);
 	prs_data->gnl_node = read_file_with_gnl(fd, prs_data);
+	split_gnl_node(prs_data, prs_data->gnl_node);
 	return (prs_data);
 }
