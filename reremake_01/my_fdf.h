@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/06 23:15:08 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/07 14:50:45 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_point
 {
 	int	x;
 	int	y;
-	int	*z;
-	int	*color;
+	int	z;
+	int	color;
 } t_point;
 
 typedef struct s_parse_data
@@ -39,7 +39,6 @@ typedef struct s_parse_data
 	int		horiz;
 	int		file_lines;
 	char	***splits;
-	int		***int_arr;
 	t_dnode	*gnl_node;
 	t_point	**point;
 } t_prs_data;

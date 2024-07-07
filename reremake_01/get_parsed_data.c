@@ -6,10 +6,9 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/07 14:35:43 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/07 14:53:40 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "my_fdf.h"
 
 static void	free_splits(char ***splits)
@@ -34,7 +33,7 @@ static void	free_splits(char ***splits)
 	free(tri_ptr);
 }
 
-static char	***split_gnl_node(t_prs_data *prs_data, t_dnode *gnl_node)
+static char	***split_gnl_data(t_prs_data *prs_data, t_dnode *gnl_node)
 {
 	int		i;
 	char	***splits;
@@ -53,7 +52,6 @@ static char	***split_gnl_node(t_prs_data *prs_data, t_dnode *gnl_node)
 		++i;
 	}
 	printf("make splits: %d\n", i);
-	free_splits(splits);
 	return (splits);
 }
 
@@ -83,6 +81,8 @@ t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data)
 	if (prs_data == NULL)
 		return (0);
 	prs_data->gnl_node = read_file_with_gnl(fd, prs_data);
-	split_gnl_node(prs_data, prs_data->gnl_node);
+	prs_data->splits = split_gnl_data(prs_data, prs_data->gnl_node);
+	free_splits(prs_data->splits);
+	//splits_to_int();
 	return (prs_data);
 }
