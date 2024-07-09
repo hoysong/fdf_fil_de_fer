@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 05:09:29 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/10 06:27:23 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -89,10 +89,12 @@ int	main(int argc, char *argv[])
 		err_hdler(OPEN_ERR, 0);
 	fd = open(argv[1], O_RDONLY);
 	mlx_ptrs.prs_data = get_parsed_data(fd, mlx_ptrs.prs_data);
-	iso_prjc(mlx_ptrs.prs_data);
 
 	setup_mlx(&mlx_ptrs);
 
+	db_point(&mlx_ptrs);
+	db_point_xy(&mlx_ptrs);
+	iso_prjc(mlx_ptrs.img_data, mlx_ptrs.prs_data);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
 	mlx_loop(mlx_ptrs.init_ptr);
