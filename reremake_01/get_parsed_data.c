@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/09 04:31:47 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/09 22:10:15 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -36,9 +36,7 @@ static int	color_atoi(char *src)
 	}
 	if (int_value == 0)
 		return (0xFFFFFF);
-	else
-		return (int_value);
-	return (0);
+	return (int_value);
 }
 
 static int	z_atoi(char *z)
@@ -56,14 +54,30 @@ static int	z_atoi(char *z)
 
 static t_point	**splits_to_points(t_prs_data *prs_data, char ***splits)
 {
+	int	i;
+	int	j;
 	t_point	**point_arr;
 
 	point_arr = (t_point **)malloc(sizeof(t_point *) * prs_data->file_lines);
 	if(point_arr == 0)
 		return (0);
+	i = 0;
+	j = 0;
+	// point_arr에 malloc을 해주는 모습
+	while(i < prs_data->horiz)
+	{
+		point_arr[i] = (t_point *)malloc(sizeof(t_point) * prs_data->horiz);
+		if (point_arr[i] == 0)
+			return (0);
+		i++;
+	}
+	while(j < prs_data->horiz)
+	{
+		point_arr[i][j].z = z_atoi(&(splits[0][0][0]));
+		point_arr[i][j].color = color_atoi(&(splits[0][0][0]));
+		j++;
+	}
 	return (point_arr);
-	point_arr[0][0].z = z_atoi(&(splits[0][0][0]));
-	point_arr[0][0].color = color_atoi(&(splits[0][0][0]));
 }
 
 static void	free_splits(char ***splits)
@@ -139,6 +153,6 @@ t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data)
 	prs_data->gnl_node = read_file_with_gnl(fd, prs_data);
 	prs_data->splits = split_gnl_data(prs_data, prs_data->gnl_node);
 	free_splits(prs_data->splits);
-	//splits_to_points();
+	prs_data->point = splits_to_points(prs_data, prs_data->splits);
 	return (prs_data);
 }
