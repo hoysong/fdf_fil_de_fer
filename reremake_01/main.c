@@ -6,22 +6,25 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/09 21:47:54 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/10 02:14:28 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
+
 #define OPEN_ERR		1
 #define FILE_NAME_ERR	2
 #define IVLD_MAP		3
 
 int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 {
-	printf("input: %d\n", input);
+//	printf("input: %d\n", input);
 	if (input == XK_Escape)
 	{
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
 		mlx_destroy_display(mlx_ptrs->init_ptr);
 		destroy_doubly_list(mlx_ptrs->prs_data->gnl_node);
+		free_splits(mlx_ptrs->prs_data->splits);
+		free_points(mlx_ptrs->prs_data);
 		free(mlx_ptrs->prs_data);
 		free(mlx_ptrs->init_ptr);
 		exit(1);
