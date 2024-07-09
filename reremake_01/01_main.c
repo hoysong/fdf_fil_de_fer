@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   01_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 02:14:28 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/10 05:09:29 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -20,6 +20,7 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 //	printf("input: %d\n", input);
 	if (input == XK_Escape)
 	{
+		mlx_destroy_image(mlx_ptrs->init_ptr, mlx_ptrs->img_data->img_ptr);
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
 		mlx_destroy_display(mlx_ptrs->init_ptr);
 		destroy_doubly_list(mlx_ptrs->prs_data->gnl_node);
@@ -27,6 +28,7 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 		free_points(mlx_ptrs->prs_data);
 		free(mlx_ptrs->prs_data);
 		free(mlx_ptrs->init_ptr);
+		free(mlx_ptrs->img_data);
 		exit(1);
 	}
 	return (0);
@@ -34,9 +36,9 @@ int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 
 static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 {
-	t_img_strc	*img_strc;
+	t_img_strc	*img;
 
-//	img_strc = malloc(sizeof(t_img_strc));
+	img = malloc(sizeof(t_img_strc));
 	mlx_ptrs->gap = 10;
 	/* === init_mlx === */
 	mlx_ptrs->init_ptr = mlx_init();
@@ -53,6 +55,11 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 		mlx_destroy_display(mlx_ptrs->init_ptr);
 		free(mlx_ptrs->init_ptr);
 	}
+
+	img->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 1000, 1000);
+	img->addr = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
+	mlx_ptrs->img_data = img;
+//	mlx_put_image_to_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr, img->img_ptr, 0, 0);
 }
 
 // =================================================================================
@@ -82,7 +89,11 @@ int	main(int argc, char *argv[])
 		err_hdler(OPEN_ERR, 0);
 	fd = open(argv[1], O_RDONLY);
 	mlx_ptrs.prs_data = get_parsed_data(fd, mlx_ptrs.prs_data);
+	iso_prjc(mlx_ptrs.prs_data);
+
 	setup_mlx(&mlx_ptrs);
+
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
+	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
 	mlx_loop(mlx_ptrs.init_ptr);
 }

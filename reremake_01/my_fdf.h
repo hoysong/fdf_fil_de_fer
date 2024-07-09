@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 02:06:15 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/10 03:32:12 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data);
 t_point	**splits_to_points(t_prs_data *prs_data, char ***splits);
 void	free_splits(char ***splits);
 void	free_points(t_prs_data *prs_data);
+void iso_prjc(t_prs_data *prs_data);
 
 #endif
