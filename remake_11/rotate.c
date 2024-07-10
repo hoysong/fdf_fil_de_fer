@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:53 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 18:11:11 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/10 20:08:25 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -109,9 +109,13 @@ void	rotate_points(t_mlx_ptrs *mlx_ptrs)
 //			*x = prev.x * cos(z_angle) - prev.y * sin(z_angle);
 //			*y = prev.x * sin(z_angle) + prev.y * cos(z_angle);
 			
-			ft_rotate_x(&(point[y][x].y), &(point[y][x].x), 45 * M_PI / 180);
-			ft_rotate_y(&(point[y][x].x), &(*(point[y][x].z)), 45 * M_PI / 180);
+			//ft_rotate_x(&(point[y][x].y), &(point[y][x].x), 45 * M_PI / 180);
+			//ft_rotate_y(&(point[y][x].x), &(*(point[y][x].z)), 45 * M_PI / 180);
 			ft_rotate_z(&(point[y][x].x), &(point[y][x].y), 45 * M_PI / 180);
+	//	이것만 돌리면 됨.
+	//	x와 y에 곱하여 gap을 줄 수 있음.
+	//	z에 곱한 값을 y에 적용한다.
+	//	y의 값에 0.5와 같이 곱셈을 하여 찌부시킨다.
 			get_lower(&(point[y][x]), 0);
 			x++;
 		}
