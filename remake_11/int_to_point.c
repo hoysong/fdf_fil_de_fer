@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:36:32 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/03 07:31:39 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/10 14:14:39 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	insert_int_to_point_arr(t_mlx_ptrs *mlx_ptrs)
 	y = 0;
 	while(y < mlx_ptrs->data->vert)
 	{
-		while(x < mlx_ptrs->data->vert)
+		while(x < mlx_ptrs->data->horiz)
 		{
 			point[y][x].x = x;
 			point[y][x].y = y;
