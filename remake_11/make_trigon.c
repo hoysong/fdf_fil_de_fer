@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 11:58:31 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 14:52:27 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/10 18:02:57 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	make_gap(t_prs_info *prs_info)
 	int	y;
 	int gap;
 
-	gap = 30;
+	gap = 1;
 	x = 0;
 	y = 0;
 	while (y < prs_info->vert)

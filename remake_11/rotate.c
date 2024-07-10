@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 19:19:53 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 15:39:58 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/10 18:11:11 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -96,11 +96,22 @@ void	rotate_points(t_mlx_ptrs *mlx_ptrs)
 		tmp = point[y][x].x;
 		while(x < mlx_ptrs->data->horiz)
 		{
-			point[y][x].x = (tmp - point[y][x].y) * cos(0.523599);
-			point[y][x].y = (tmp + point[y][x].y) * sin(0.523599) - *(point[y][x].z);
-//			ft_rotate_x(&(point[y][x].y), &(point[y][x].x), 15);
-//			ft_rotate_y(&(point[y][x].x), &(*(point[y][x].z)), 15);
-//			ft_rotate_z(&(point[y][x].x), &(point[y][x].y), 45);
+//void  isometric(int x, int y, int z)
+//{
+// int tmp;
+//
+// tmp = x;
+// x = (tmp - y) * cos(0.523599);
+// y = (tmp + y) * sin(0.523599) - z;
+//}
+//			point[y][x].x = (tmp - point[y][x].y) * cos(0);
+//			point[y][x].y = (tmp + point[y][x].y) * sin(0) - *(point[y][x].z);
+//			*x = prev.x * cos(z_angle) - prev.y * sin(z_angle);
+//			*y = prev.x * sin(z_angle) + prev.y * cos(z_angle);
+			
+			ft_rotate_x(&(point[y][x].y), &(point[y][x].x), 45 * M_PI / 180);
+			ft_rotate_y(&(point[y][x].x), &(*(point[y][x].z)), 45 * M_PI / 180);
+			ft_rotate_z(&(point[y][x].x), &(point[y][x].y), 45 * M_PI / 180);
 			get_lower(&(point[y][x]), 0);
 			x++;
 		}

@@ -81,7 +81,7 @@ void	debug_point_arr(t_mlx_ptrs *mlx_ptrs)
 	{
 		while(width < mlx_ptrs->data->horiz)
 		{
-			printf("%d", point_arr[height][width].x);
+			printf("%d ", point_arr[height][width].x);
 			width ++;
 		}
 		printf("\n");
