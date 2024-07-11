@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/12 04:01:39 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/12 04:06:47 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -26,8 +26,8 @@ static void	ft_rotate_z(int *x, int *y, double z_angle)
 
 	prev.x = *x;
 	prev.y = *y;
-	*x = (prev.x * cos(z_angle) - prev.y * sin(z_angle)) * 30;
-	*y = (prev.x * sin(z_angle) + prev.y * cos(z_angle)) * 30;
+	*x = (prev.x * cos(z_angle) - prev.y * sin(z_angle)) * 1;
+	*y = (prev.x * sin(z_angle) + prev.y * cos(z_angle)) * 1;
 }
 
 
@@ -80,7 +80,7 @@ static void	get_low_num_2(t_prs_data *prs_data, t_img_strc *img_data)
 			y = prs_data->point[0][i].y;
 		i++;
 	}
-	db_point_xy_prs_data(prs_data);
+//	db_point_xy_prs_data(prs_data);
 	pixel_put(x, y, img_data, prs_data);
 }
 
@@ -101,7 +101,7 @@ void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
 		{
 			ft_rotate_z(&(point[i][j].x), &(point[i][j].y), 45 * M_PI / 180); //바라보는 기준 45도 회전
 			// x와 y에 곱하여 gap을 줄 수 있음
-			point[i][j].z *= 50;
+			point[i][j].z *= 5;
 			point[i][j].y += point[i][j].z;
 			// z에 곱한 값을 y에 적용한다.
 			point[i][j].y *= 0.5;
