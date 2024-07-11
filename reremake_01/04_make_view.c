@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 15:00:23 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/11 23:54:26 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -33,6 +33,38 @@
 //	}
 //}
 
+//void rotate_y(t_point *a)
+//{
+//	int	tmp;
+//	int	tetha;
+//
+//	tetha = 0;
+//	tmp = a->x;
+//	a->x = tmp * cos(tetha) + a->z * sin(tetha);
+//	a->z = a->z * cos(tetha) - tmp * sin(tetha);
+//}
+//
+//void rotate_x(t_point *a)
+//{
+//	int	tmp;
+//	int	alpha;
+//	
+//	alpha = 0;
+//	tmp = a->y;
+//	a->y = tmp * cos(alpha) - a->z * sin(alpha);
+//	a->z = tmp * sin(alpha) + a->z * cos(alpha);
+//	//a->y = tmp * cos(alpha) - fdf->a->z * sin(alpha);
+//	//a->z = tmp * sin(alpha) + fdf->a->z * cos(alpha);
+//}
+
+static void	my_mlx_pixel_put(t_img_strc *img_data, int x, int y, int color)
+{
+	char *dst;
+
+	dst = img_data->addr + (y * img_data->size_line + x * (img_data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
 void rotate_z(t_point *a)
 {
 	int	tmp;
@@ -44,29 +76,6 @@ void rotate_z(t_point *a)
 	a->y = tmp * sin(gamma) + a->y * cos(gamma);
 }
 
-void rotate_y(t_point *a)
-{
-	int	tmp;
-	int	tetha;
-
-	tetha = 0;
-	tmp = a->x;
-	a->x = tmp * cos(tetha) + a->z * sin(tetha);
-	a->z = a->z * cos(tetha) - tmp * sin(tetha);
-}
-
-void rotate_x(t_point *a)
-{
-	int	tmp;
-	int	alpha;
-	
-	alpha = 0;
-	tmp = a->y;
-	a->y = tmp * cos(alpha) - a->z * sin(alpha);
-	a->z = tmp * sin(alpha) + a->z * cos(alpha);
-	//a->y = tmp * cos(alpha) - fdf->a->z * sin(alpha);
-	//a->z = tmp * sin(alpha) + fdf->a->z * cos(alpha);
-}
 
 static void	get_low_num(int x, int y, t_prs_data *prs_data, int status)
 {
@@ -91,8 +100,8 @@ static void	get_low_num(int x, int y, t_prs_data *prs_data, int status)
 			j = 0;
 			while(j < prs_data->horiz)
 			{
-				prs_data->point[i][j].x = x;
-				prs_data->point[i][j].y = y;
+				prs_data->point[i][j].x += x;
+				prs_data->point[i][j].y += y;
 				j++;
 			}
 			i++;
@@ -100,19 +109,21 @@ static void	get_low_num(int x, int y, t_prs_data *prs_data, int status)
 	}
 }
 
-static void	my_mlx_pixel_put(t_img_strc *img_data, int x, int y, int color)
+static void	ft_rotate_z(int *x, int *y, double z_angle)
 {
-	char *dst;
+	t_point	prev;
 
-	dst = img_data->addr + (y * img_data->size_line + x * (img_data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	prev.x = *x;
+	prev.y = *y;
+	*x = prev.x * cos(z_angle) - prev.y * sin(z_angle);
+	*y = prev.x * sin(z_angle) + prev.y * cos(z_angle);
 }
+
 
 void pixel_put(t_img_strc *img_data, t_prs_data *prs_data)
 {
 	int		i;
 	int		j;
-	int		tmp;
 	t_point	**point;
 	
 	i = 0;
@@ -120,7 +131,6 @@ void pixel_put(t_img_strc *img_data, t_prs_data *prs_data)
 	while(i < prs_data->vert)
 	{
 		j = 0;
-		tmp = point[i][j].x;
 		while(j < prs_data->horiz)
 		{
 			my_mlx_pixel_put(img_data, point[i][j].x, point[i][j].y, point[i][j].color);
@@ -128,7 +138,7 @@ void pixel_put(t_img_strc *img_data, t_prs_data *prs_data)
 		}
 		i++;
 	}
-	get_low_num(point[i][j].x, point[i][j].y, prs_data, 1);
+//	get_low_num(point[i][j].x, point[i][j].y, prs_data, 1);
 }
 
 void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
@@ -146,13 +156,16 @@ void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
 		tmp = point[i][j].x;
 		while(j < prs_data->horiz)
 		{
-			point[i][j].x = (tmp - point[i][j].y) * cos(0.523599);
-			point[i][j].y = (tmp + point[i][j].y) * sin(0.523599) - point[i][j].z;
-			get_low_num(point[i][j].x, point[i][j].y, prs_data, 0);
+			ft_rotate_z(&(point[i][j].x), &(point[i][j].y), 45 * M_PI / 180); //바라보는 기준 45도 회전
+			// x와 y에 곱하여 gap을 줄 수 있음.
+			// z에 곱한 값을 y에 적용한다.
+			// y의 값에 0.5와 같이 곱셈을 하여 찌부시킨다.
 //			my_mlx_pixel_put(img_data, point[i][j].x, point[i][j].y, point[i][j].color);
+			get_low_num(point[i][j].x, point[i][j].y, prs_data, 0);
 			j++;
 		}
 		i++;
 	}
 	get_low_num(0, 0, prs_data, 1);
+	pixel_put(img_data, prs_data);
 }

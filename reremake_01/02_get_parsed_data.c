@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 02:14:27 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/11 23:09:37 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -81,18 +81,5 @@ t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data)
 	prs_data->point = splits_to_points(prs_data, prs_data->splits);
 	int	i = 0;
 	int	j = 0;
-//	while(i < prs_data->vert)
-//	{
-//		printf("%d\n", i);
-//		while(j < prs_data->horiz)
-//		{
-//			printf("%3d, ", prs_data->point[i][j].z);
-//			printf("%.3d", prs_data->point[i][j].color);
-//			j++;
-//		}
-//		printf("\n");
-//		i++;
-//		j = 0;
-//	}
 	return (prs_data);
 }
