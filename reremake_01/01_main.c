@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 06:27:23 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/12 01:05:18 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -39,7 +39,6 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	t_img_strc	*img;
 
 	img = malloc(sizeof(t_img_strc));
-	mlx_ptrs->gap = 10;
 	/* === init_mlx === */
 	mlx_ptrs->init_ptr = mlx_init();
 	if (mlx_ptrs->init_ptr == 0)
@@ -92,8 +91,6 @@ int	main(int argc, char *argv[])
 
 	setup_mlx(&mlx_ptrs);
 
-	db_point(&mlx_ptrs);
-	db_point_xy(&mlx_ptrs);
 	iso_prjc(mlx_ptrs.img_data, mlx_ptrs.prs_data);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
