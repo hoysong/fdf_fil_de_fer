@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/12 04:06:47 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/12 04:53:51 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -100,12 +100,9 @@ void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
 		while(j < prs_data->horiz)
 		{
 			ft_rotate_z(&(point[i][j].x), &(point[i][j].y), 45 * M_PI / 180); //바라보는 기준 45도 회전
-			// x와 y에 곱하여 gap을 줄 수 있음
-			point[i][j].z *= 5;
-			point[i][j].y += point[i][j].z;
-			// z에 곱한 값을 y에 적용한다.
-			point[i][j].y *= 0.5;
-			// y의 값에 0.5와 같이 곱셈을 하여 찌부시킨다.
+			point[i][j].z *= 5; // z 1당 높이값을 지정.
+			point[i][j].y += point[i][j].z; // z에 곱한 값을 y에 적용한다.
+			point[i][j].y *= 0.5; // y의 값에 0.5와 같이 곱셈을 하여 찌부시킨다.
 			j++;
 		}
 		i++;
