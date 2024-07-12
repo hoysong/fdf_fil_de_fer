@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/12 09:14:29 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/12 16:55:54 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -38,7 +38,7 @@ static void	get_low_num(int x, int y, t_prs_data *prs_data, t_img_strc *img_data
 	{
 		mv.mv_x *= -1;
 		mv.mv_y *= -1;
-		printf("%d %d\n", mv.mv_x, mv.mv_y);
+//		printf("%d %d\n", mv.mv_x, mv.mv_y);
 		i = 0;
 		while(i < prs_data->vert)
 		{
@@ -52,7 +52,7 @@ static void	get_low_num(int x, int y, t_prs_data *prs_data, t_img_strc *img_data
 			}
 			i++;
 		}
-		db_point_xy_prs_data(prs_data);
+		//db_point_xy_prs_data(prs_data);
 	}
 }
 //put pixel in img buffer
