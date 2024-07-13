@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/12 16:53:45 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/13 23:46:08 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -47,7 +47,7 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 		free(mlx_ptrs->init_ptr);
 	}
 	/* === gen win ptr === */
-	mlx_ptrs->win_ptr = mlx_new_window(mlx_ptrs->init_ptr, 1000, 1000, "window_1");
+	mlx_ptrs->win_ptr = mlx_new_window(mlx_ptrs->init_ptr, 1920, 1080, "window_1");
 	if (mlx_ptrs->win_ptr == 0)
 	{
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
@@ -55,10 +55,9 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 		free(mlx_ptrs->init_ptr);
 	}
 
-	img->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 1000, 1000);
+	img->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 1920, 1080);
 	img->addr = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
 	mlx_ptrs->img_data = img;
-//	mlx_put_image_to_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr, img->img_ptr, 0, 0);
 }
 
 // =================================================================================
@@ -94,6 +93,8 @@ int	main(int argc, char *argv[])
 	iso_prjc(mlx_ptrs.img_data, mlx_ptrs.prs_data);
 //	db_point_xy(&mlx_ptrs);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
+	printf("%d\n", mlx_ptrs.img_data->bits_per_pixel);
+	printf("%d\n", mlx_ptrs.img_data->size_line);
 	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
