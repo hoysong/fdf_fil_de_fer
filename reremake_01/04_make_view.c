@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/14 01:13:16 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/14 05:46:46 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -17,6 +17,29 @@ static void	my_mlx_pixel_put(t_img_strc *img_data, int x, int y, int color)
 
 	dst = img_data->addr + (y * img_data->size_line + x * (img_data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+static void	low_num_apply(t_mv mv, t_prs_data *prs_data, t_img_strc *img_data)
+{
+	int	i;
+	int	j;
+	t_point **point;
+
+	j = 0;
+	i = 0;
+	point = prs_data->point;
+	while(i < prs_data->vert)
+	{
+		j = 0;
+		while(j < prs_data->horiz)
+		{
+			prs_data->point[i][j].x += mv.mv_x;
+			prs_data->point[i][j].y += mv.mv_y;
+			my_mlx_pixel_put(img_data, point[i][j].x, point[i][j].y, point[i][j].color);
+			j++;
+		}
+		i++;
+	}
 }
 
 static void	get_low_num(int x, int y, t_prs_data *prs_data, t_img_strc *img_data)
@@ -39,20 +62,8 @@ static void	get_low_num(int x, int y, t_prs_data *prs_data, t_img_strc *img_data
 		mv.mv_x *= -1;
 		mv.mv_y *= -1;
 //		printf("%d %d\n", mv.mv_x, mv.mv_y);
-		i = 0;
-		while(i < prs_data->vert)
-		{
-			j = 0;
-			while(j < prs_data->horiz)
-			{
-				prs_data->point[i][j].x += mv.mv_x;
-				prs_data->point[i][j].y += mv.mv_y;
-				my_mlx_pixel_put(img_data, point[i][j].x, point[i][j].y, point[i][j].color);
-				j++;
-			}
-			i++;
-		}
 		//db_point_xy_prs_data(prs_data);
+		low_num_apply(mv, prs_data, img_data);
 	}
 }
 
@@ -63,8 +74,8 @@ static void	ft_rotate_z(int *x, int *y, double z_angle)
 
 	prev.x = *x;
 	prev.y = *y;
-	*x = (prev.x * cos(z_angle) - prev.y * sin(z_angle)) * 30;
-	*y = (prev.x * sin(z_angle) + prev.y * cos(z_angle)) * 30;
+	*x = (prev.x * cos(z_angle) - prev.y * sin(z_angle)) * 2;
+	*y = (prev.x * sin(z_angle) + prev.y * cos(z_angle)) * 2;
 }
 
 
@@ -110,7 +121,7 @@ void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
 			point[i][j].y *= -1;
 			point[i][j].z *= -1;
 			ft_rotate_z(&(point[i][j].x), &(point[i][j].y), 45 * M_PI / 180); //바라보는 기준 45도 회전
-			point[i][j].z *= 40; // z 1당 높이값을 지정.
+			point[i][j].z *= 2; // z 1당 높이값을 지정.
 			point[i][j].y += point[i][j].z; // z에 곱한 값을 y에 적용한다.
 			point[i][j].y *= 0.5; // y의 값에 0.5와 같이 곱셈을 하여 찌부시킨다.
 			get_low_num(point[i][j].x, point[i][j].y, prs_data, 0);
@@ -119,4 +130,5 @@ void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
 		i++;
 	}
 	get_low_num(0, 0, prs_data, img_data);
+	db_point_xy_prs_data(prs_data);
 }
