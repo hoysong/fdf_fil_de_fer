@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 01:53:43 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/10 05:39:06 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/14 07:18:00 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -24,8 +24,8 @@ static int	color_atoi(char *src)
 	{
 		if ('0' <= *src && *src <= '9')
 			int_value = (int_value * 16) + (*src - '0');
-		//if ('a' <= *src && *src <= 'f')
-		//	toupper(*src);
+		if ('a' <= *src && *src <= 'f')
+			*src = ft_toupper(*src);
 		if ('A' <= *src && *src <= 'F')
 			int_value = (int_value * 16) + (*src - 55);
 		++src;
