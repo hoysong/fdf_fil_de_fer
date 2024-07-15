@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/16 04:02:07 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/16 08:55:50 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -35,7 +35,7 @@ static void	low_num_apply(t_mv mv, t_prs_data *prs_data, t_img_strc *img_data)
 		{
 			prs_data->point[i][j].x += mv.mv_x;
 			prs_data->point[i][j].y += mv.mv_y;
-			my_mlx_pixel_put(img_data, point[i][j].x, point[i][j].y, point[i][j].color);
+//			my_mlx_pixel_put(img_data, point[i][j].x, point[i][j].y, point[i][j].color);
 			j++;
 		}
 		i++;
@@ -61,8 +61,6 @@ static void	get_low_num(int x, int y, t_prs_data *prs_data, t_img_strc *img_data
 	{
 		mv.mv_x *= -1;
 		mv.mv_y *= -1;
-//		printf("%d %d\n", mv.mv_x, mv.mv_y);
-		//db_point_xy_prs_data(prs_data);
 		low_num_apply(mv, prs_data, img_data);
 	}
 }
@@ -128,5 +126,4 @@ void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
 		i++;
 	}
 	get_low_num(0, 0, prs_data, img_data);
-	db_point_xy_prs_data(prs_data);
 }

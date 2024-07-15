@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/11 23:09:37 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/16 08:56:30 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -32,10 +32,8 @@ static char	***split_gnl_data(t_prs_data *prs_data, t_dnode *gnl_node)
 	{
 		splits[i] = ft_split((char *)gnl_node->data, ' ');
 		gnl_node = gnl_node->next_node;
-		//printf("%s\n", *(splits[i]));
 		++i;
 	}
-//	printf("make splits: %d\n", i);
 	return (splits);
 }
 
@@ -56,7 +54,6 @@ static t_dnode *read_file_with_gnl(int fd, t_prs_data *prs_data)
 	}
 	prs_data->file_lines --;
 	prs_data->vert = prs_data->file_lines;
-//	printf("file_lines(gnl): %d\n", prs_data->file_lines);
 	return (node_head);
 }
 
