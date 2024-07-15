@@ -74,3 +74,21 @@ void db_point_xy_prs_data(t_prs_data *prs_data)
 		printf("\n");
 }
 
+void	pixel_test(t_img_strc *img_data, t_prs_data *prs_data)
+{
+	int	i;
+	int	j;
+	t_point **point;
+
+	i = 0;
+	while(i < prs_data->vert)
+	{
+		j = 0;
+		while(j < prs_data->horiz)
+		{
+			my_mlx_pixel_put(img_data, point[i][j].x, point[i][j].y, 0xFF0000);
+			j++;
+		}
+		i++;
+	}
+}

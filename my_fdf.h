@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/12 03:17:22 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/16 02:33:29 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,12 @@ t_point	**splits_to_points(t_prs_data *prs_data, char ***splits);
 void	free_splits(char ***splits);
 void	free_points(t_prs_data *prs_data);
 void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data);
+void	my_mlx_pixel_put(t_img_strc *img_data, int x, int y, int color);
+void	draw_line(t_img_strc *img_data, t_prs_data *prs_data);
 
 void db_point(t_mlx_ptrs *mlx_ptrs);
 void db_point_xy(t_mlx_ptrs *mlx_ptrs);
 void db_point_xy_prs_data(t_prs_data *prs_data);
+void	pixel_test(t_img_strc *img_data, t_prs_data *prs_data);
 
 #endif
