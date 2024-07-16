@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 01:53:43 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/14 07:18:00 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/16 09:15:46 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -51,18 +51,17 @@ static int	z_atoi(t_point *point_arr, char *z)
 
 t_point	**splits_to_points(t_prs_data *prs_data, char ***splits)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	t_point	**point_arr;
 
 	point_arr = (t_point **)malloc(sizeof(t_point *) * prs_data->file_lines);
 	if(point_arr == 0)
 		return (0);
 	i = 0;
-	j = 0;
-	// point_arr에 malloc을 해주는 모습
 	while(i < prs_data->vert)
 	{
+		j = 0;
 		point_arr[i] = (t_point *)malloc(sizeof(t_point) * prs_data->horiz);
 		if (point_arr[i] == 0)
 			return (0);
@@ -73,7 +72,6 @@ t_point	**splits_to_points(t_prs_data *prs_data, char ***splits)
 			point_arr[i][j].z = z_atoi(&(point_arr[i][j]), &(splits[i][j][0]));
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 	return (point_arr);
