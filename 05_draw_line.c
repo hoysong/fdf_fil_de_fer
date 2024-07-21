@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:00:47 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/16 08:51:28 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/21 20:57:32 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -116,13 +116,15 @@ void	draw_line(t_img_strc *img_data, t_prs_data *prs_data)
 	point = prs_data->point;
 
 	i = 0;
-	while(i < prs_data->vert - 1)
+	while(i < prs_data->vert)
 	{
 		j = 0;
-		while(j < prs_data->horiz - 1)
+		while(j < prs_data->horiz)
 		{
-			brzm(point[i][j].x, point[i][j].y, point[i][j + 1].x, point[i][j + 1].y, img_data);
-			brzm(point[i][j].x, point[i][j].y, point[i + 1][j].x, point[i + 1][j].y, img_data);
+			if (j < prs_data->horiz - 1)
+				brzm(point[i][j].x, point[i][j].y, point[i][j + 1].x, point[i][j + 1].y, img_data);
+			if (i < prs_data->vert - 1)
+				brzm(point[i][j].x, point[i][j].y, point[i + 1][j].x, point[i + 1][j].y, img_data);
 			j++;
 		}
 		i++;
