@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_make_view.c                                     :+:      :+:    :+:   */
+/*   04_iso_prjc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/16 08:55:50 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/22 22:36:14 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -72,8 +72,8 @@ static void	ft_rotate_z(int *x, int *y, double z_angle)
 
 	prev.x = *x;
 	prev.y = *y;
-	*x = (prev.x * cos(z_angle) - prev.y * sin(z_angle)) * 60;
-	*y = (prev.x * sin(z_angle) + prev.y * cos(z_angle)) * 60;
+	*x = (prev.x * cos(z_angle) - prev.y * sin(z_angle)) * 40;
+	*y = (prev.x * sin(z_angle) + prev.y * cos(z_angle)) * 40;
 }
 
 
@@ -117,9 +117,9 @@ void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
 			point[i][j].y *= -1;
 			point[i][j].z *= -1;
 			ft_rotate_z(&(point[i][j].x), &(point[i][j].y), 45 * M_PI / 180); //바라보는 기준 45도 회전
-			point[i][j].z *= 80; // z 1당 높이값을 지정.
+			point[i][j].z *= 40; // z 1당 높이값을 지정.
 			point[i][j].y += point[i][j].z; // z에 곱한 값을 y에 적용한다.
-			point[i][j].y *= 0.5; // y의 값에 0.5와 같이 곱셈을 하여 찌부시킨다.
+			point[i][j].y *= 0.58; // y의 값에 0.5와 같이 곱셈을 하여 찌부시킨다.
 			get_low_num(point[i][j].x, point[i][j].y, prs_data, 0);
 			j++;
 		}
