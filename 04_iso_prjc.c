@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/22 22:36:14 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/23 13:54:50 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -126,4 +126,5 @@ void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data)
 		i++;
 	}
 	get_low_num(0, 0, prs_data, img_data);
+//	resize_scale(prs_data);
 }

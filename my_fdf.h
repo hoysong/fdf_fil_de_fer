@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/16 02:33:29 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/23 13:44:08 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ void db_point(t_mlx_ptrs *mlx_ptrs);
 void db_point_xy(t_mlx_ptrs *mlx_ptrs);
 void db_point_xy_prs_data(t_prs_data *prs_data);
 void	pixel_test(t_img_strc *img_data, t_prs_data *prs_data);
+void	resize_scale(t_prs_data *prs_data);
 
 #endif
