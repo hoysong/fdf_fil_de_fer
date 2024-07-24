@@ -6,12 +6,17 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 08:36:44 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 08:54:24 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	FDFMLX_H
 # define FDFMLX_H
+# define WIN_X 1000
+# define WIN_Y 800
+# define OPEN_ERR 1
+# define FILE_NAME_ERR 2
+# define IVLD_MAP 3
 # include "my_libft/linked_list/lkdlist.h"
 # include <stdio.h>
 # include <stdio.h>

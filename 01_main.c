@@ -6,14 +6,10 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/24 13:41:13 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 08:54:56 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
-
-#define OPEN_ERR		1
-#define FILE_NAME_ERR	2
-#define IVLD_MAP		3
 
 int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 {
@@ -47,7 +43,7 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 		free(mlx_ptrs->init_ptr);
 	}
 	/* === gen win ptr === */
-	mlx_ptrs->win_ptr = mlx_new_window(mlx_ptrs->init_ptr, 1000, 800, "window_1");
+	mlx_ptrs->win_ptr = mlx_new_window(mlx_ptrs->init_ptr, WIN_X, WIN_Y, "fdf");
 	if (mlx_ptrs->win_ptr == 0)
 	{
 		mlx_destroy_window(mlx_ptrs->init_ptr, mlx_ptrs->win_ptr);
@@ -59,8 +55,6 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	img->addr = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
 	mlx_ptrs->img_data = img;
 }
-
-// =================================================================================
 
 void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 {

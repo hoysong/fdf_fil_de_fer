@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_get_scale_data.c                                :+:      :+:    :+:   */
+/*   05_adjust_scale.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 07:56:42 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/24 13:45:44 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 08:55:11 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ static double	calc_gap(t_prs_data *prs_data, t_mv *cdnate)
 {
 	double	new_gap;
 
-	if (cdnate->mv_x - 1000 > cdnate->mv_y - 800)
+	if (cdnate->mv_x - WIN_X > cdnate->mv_y - WIN_Y)
 	{
-		new_gap = cdnate->mv_x - 1000;
+		new_gap = cdnate->mv_x - WIN_X;
 		new_gap = 1 - (new_gap / cdnate->mv_x);
 		printf("gapgapgap; %f\n", new_gap);
 	}
-	else if (cdnate->mv_y - 1000 < cdnate->mv_y - 800)
+	else if (cdnate->mv_y - WIN_X < cdnate->mv_y - WIN_Y)
 	{
-		new_gap = cdnate->mv_y - 800;
+		new_gap = cdnate->mv_y - WIN_Y;
 		new_gap = 1 - (new_gap / cdnate->mv_y);
 		printf("gapgapgap; %f\n", new_gap);
 	}
@@ -86,7 +86,7 @@ void	adjust_scale(t_prs_data *prs_data)
 	cdnate.mv_x = 0;
 	cdnate.mv_y = 0;
 	get_bigst_data(prs_data, &(cdnate));
-	if (cdnate.mv_x < 1000 && cdnate.mv_y < 800)
+	if (cdnate.mv_x < WIN_X && cdnate.mv_y < WIN_Y)
 		return ;
 	new_gap = calc_gap(prs_data, &(cdnate));
 	printf("new_gap x; %d\n", cdnate.mv_x);
