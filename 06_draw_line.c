@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_draw_line.c                                     :+:      :+:    :+:   */
+/*   06_draw_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:00:47 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/21 20:57:32 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 07:41:13 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
 
-void Bresenham_y(int x0, int y0, int x1, int y1, t_img_strc *img_data)
+static void Bresenham_y(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 {
 	int	x = x0;
 	int	y = y0;
@@ -39,7 +39,7 @@ void Bresenham_y(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 	}
 }
 
-void Bresenham_x(int x0, int y0, int x1, int y1, t_img_strc *img_data)
+static void Bresenham_x(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 {
 	int	x = x0;
 	int	y = y0;
@@ -65,7 +65,7 @@ void Bresenham_x(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 		}
 	}
 }
-void brzm(int x0, int y0, int x1, int y1, t_img_strc *img_data)
+static void brzm(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 {
 		if (abs(y1 - y0) < abs(x1 - x0))
 		{
