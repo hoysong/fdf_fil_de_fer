@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:00:47 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 07:59:51 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 08:18:10 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -18,8 +18,8 @@ static void Bresenham_y(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 	int	dx = x1 - x0;
 	int	dy = y1 - y0;
 	int	P = 2 * dx - dy;  // P1(초기값) 설정
-
 	int xi = 1;
+
 		if (dx < 0)
 		{
 			xi = -1;
@@ -65,24 +65,30 @@ static void Bresenham_x(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 		}
 	}
 }
-static void brzm(int x0, int y0, int x1, int y1, t_img_strc *img_data)
+
+//static void brzm_2(int x0, int y0, int x1, int y1, t_img_strc *img_data)
+static void brzm(t_point start, t_point end, t_img_strc *img_data)
 {
-		if (abs(y1 - y0) < abs(x1 - x0))
+		if (abs(end.y - start.y) < abs(end.x - start.x))
 		{
-		        if (x0 > x1)
-			Bresenham_x( x1, y1, x0, y0, img_data);
-		        else
-			Bresenham_x(x0, y0, x1, y1, img_data);
+			if (start.x > end.x)
+			Bresenham_x(end.x, end.y, start.x, start.y, img_data);
+			else
+			Bresenham_x(start.x, start.y, end.x, end.y, img_data);
 		}
 		else
 		{
-		if (y0 > y1)
-			Bresenham_y(x1, y1, x0, y0, img_data);
+		if (start.y > end.y)
+			Bresenham_y(end.x, end.y, start.x, start.y, img_data);
 		else
-			Bresenham_y(x0, y0, x1, y1, img_data);
+			Bresenham_y(start.x, start.y, end.x, end.y, img_data);
 		}
 }
 
+//static void brzm_1()
+//{
+//	return ;
+//}
 
 void	draw_line(t_img_strc *img_data, t_prs_data *prs_data)
 {
@@ -98,9 +104,9 @@ void	draw_line(t_img_strc *img_data, t_prs_data *prs_data)
 		while(j < prs_data->horiz)
 		{
 			if (j < prs_data->horiz - 1)
-				brzm(point[i][j].x, point[i][j].y, point[i][j + 1].x, point[i][j + 1].y, img_data);
+				brzm(point[i][j], point[i][j + 1], img_data);
 			if (i < prs_data->vert - 1)
-				brzm(point[i][j].x, point[i][j].y, point[i + 1][j].x, point[i + 1][j].y, img_data);
+				brzm(point[i][j], point[i + 1][j], img_data);
 			j++;
 		}
 		i++;
