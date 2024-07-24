@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/24 13:40:47 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 08:36:44 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,28 @@ typedef struct s_move_point
 	int	mv_x;
 	int	mv_y;
 }	t_mv;
+
+typedef struct s_brzm
+{
+
+	int	x;
+	int	y;
+	int	dx;
+	int	dy;
+	int	P;
+	int	i_val;
+} t_brzm;
+
+//typedef struct s_brzm
+//{
+//
+//	int	x = start.x;
+//	int	y = start.y;
+//	int	dx = end.x - start.x;
+//	int	dy = end.y - start.y;
+//	int	P = 2 * dx - dy;  // P1(초기값) 설정
+//	int i_val = 1;
+//} t_brzm;
 
 t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data);
 t_point	**splits_to_points(t_prs_data *prs_data, char ***splits);

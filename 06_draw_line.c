@@ -6,83 +6,68 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:00:47 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 08:32:49 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 08:42:08 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
 
 static void Bresenham_y(t_point start, t_point end, t_img_strc *img_data)
 {
-	int	x = start.x;
-	int	y = start.y;
-	int	dx = end.x - start.x;
-	int	dy = end.y - start.y;
-	int	P = 2 * dx - dy;  // P1(초기값) 설정
-	int xi = 1;
+	t_brzm brzm;
 
-	if (dx < 0)
+	brzm.x = start.x;
+	brzm.y = start.y;
+	brzm.dx = end.x - start.x;
+	brzm.dy = end.y - start.y;
+	brzm.P = 2 * brzm.dx - brzm.dy;  // P1(초기값) 설정
+	brzm.i_val = 1;
+	if (brzm.dx < 0)
 	{
-		xi = -1;
-		dx = -dx;
+		brzm.i_val = -1;
+		brzm.dx = -brzm.dx;
 	}
-	while (y <= end.y)
+	while (brzm.y <= end.y)
 	{
-		my_mlx_pixel_put(img_data, x, y, 0x995555);
-		y++;  // x는 매 좌표마다 증가
-		if (P < 0)  // Pnext 구하는 부분
-			P = P + 2 * dx;
+		my_mlx_pixel_put(img_data, brzm.x, brzm.y, 0x995555);
+		brzm.y++;  // x는 매 좌표마다 증가
+		if (brzm.P < 0)  // Pnext 구하는 부분
+			brzm.P = brzm.P + 2 * brzm.dx;
 		else {
-			P = P + 2 * dx - 2 * dy;
-			x += xi;
+			brzm.P = brzm.P + 2 * brzm.dx - 2 * brzm.dy;
+			brzm.x += brzm.i_val;
 		}
 	}
 }
 
 static void Bresenham_x(t_point start, t_point end, t_img_strc *img_data)
 {
-	int	x = start.x;
-	int	y = start.y;
-	int	dx = end.x - start.x;
-	int	dy = end.y - start.y;
-	int	P = 2 * dy - dx;  // P1(초기값) 설정
-	int	yi = 1;
+	t_brzm brzm;
+	brzm.x = start.x;
+	brzm.y = start.y;
+	brzm.dx = end.x - start.x;
+	brzm.dy = end.y - start.y;
+	brzm.P = 2 * brzm.dy - brzm.dx;  // P1(초기값) 설정
+	brzm.i_val = 1;
 
-	if (dy < 0)
+	if (brzm.dy < 0)
 	{
-		yi = -1;
-		dy = -dy;
+		brzm.i_val = -1;
+		brzm.dy = -brzm.dy;
 	}
-	while (x <= end.x)
+	while (brzm.x <= end.x)
 	{
-		my_mlx_pixel_put(img_data, x, y, 0x00ff00);
-		x++;  // x는 매 좌표마다 증가
-		if (P < 0)  // Pnext 구하는 부분
-			P = P + 2 * dy;
+		my_mlx_pixel_put(img_data, brzm.x, brzm.y, 0x00ff00);
+		brzm.x++;  // x는 매 좌표마다 증가
+		if (brzm.P < 0)  // Pnext 구하는 부분
+			brzm.P = brzm.P + 2 * brzm.dy;
 		else
 		{
-			P = P + 2 * dy - 2 * dx;
-			y += yi;
+			brzm.P = brzm.P + 2 * brzm.dy - 2 * brzm.dx;
+			brzm.y += brzm.i_val;
 		}
 	}
 }
 
-//static void brzm(t_point start, t_point end, t_img_strc *img_data)
-//{
-//		if (abs(end.y - start.y) < abs(end.x - start.x))
-//		{
-//			if (start.x > end.x)
-//			Bresenham_x(end.x, end.y, start.x, start.y, img_data);
-//			else
-//			Bresenham_x(start.x, start.y, end.x, end.y, img_data);
-//		}
-//		else
-//		{
-//		if (start.y > end.y)
-//			Bresenham_y(end.x, end.y, start.x, start.y, img_data);
-//		else
-//			Bresenham_y(start.x, start.y, end.x, end.y, img_data);
-//		}
-//}
 static void brzm(t_point start, t_point end, t_img_strc *img_data)
 {
 		if (abs(end.y - start.y) < abs(end.x - start.x))
