@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:00:47 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 07:41:13 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 07:59:51 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -70,40 +70,16 @@ static void brzm(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 		if (abs(y1 - y0) < abs(x1 - x0))
 		{
 		        if (x0 > x1)
-			Bresenham_x(
-					x1,
-					y1,
-					x0,
-					y0,
-					img_data
-					);
+			Bresenham_x( x1, y1, x0, y0, img_data);
 		        else
-			Bresenham_x(
-					x0,
-					y0,
-					x1,
-					y1,
-					img_data
-					);
+			Bresenham_x(x0, y0, x1, y1, img_data);
 		}
 		else
 		{
-		        if (y0 > y1)
-			Bresenham_y(
-					x1,
-					y1,
-					x0,
-					y0,
-					img_data
-					);
-		        else
-			Bresenham_y(
-					x0,
-					y0,
-					x1,
-					y1,
-					img_data
-					);
+		if (y0 > y1)
+			Bresenham_y(x1, y1, x0, y0, img_data);
+		else
+			Bresenham_y(x0, y0, x1, y1, img_data);
 		}
 }
 
