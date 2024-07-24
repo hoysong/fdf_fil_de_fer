@@ -6,55 +6,55 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:00:47 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 08:18:10 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 08:32:49 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
 
-static void Bresenham_y(int x0, int y0, int x1, int y1, t_img_strc *img_data)
+static void Bresenham_y(t_point start, t_point end, t_img_strc *img_data)
 {
-	int	x = x0;
-	int	y = y0;
-	int	dx = x1 - x0;
-	int	dy = y1 - y0;
+	int	x = start.x;
+	int	y = start.y;
+	int	dx = end.x - start.x;
+	int	dy = end.y - start.y;
 	int	P = 2 * dx - dy;  // P1(초기값) 설정
 	int xi = 1;
 
-		if (dx < 0)
-		{
-			xi = -1;
-			dx = -dx;
-		}
-	while (y <= y1)
+	if (dx < 0)
 	{
-		my_mlx_pixel_put(img_data, x, y, 0xffffff);
+		xi = -1;
+		dx = -dx;
+	}
+	while (y <= end.y)
+	{
+		my_mlx_pixel_put(img_data, x, y, 0x995555);
 		y++;  // x는 매 좌표마다 증가
 		if (P < 0)  // Pnext 구하는 부분
 			P = P + 2 * dx;
-		else
-		{
+		else {
 			P = P + 2 * dx - 2 * dy;
 			x += xi;
 		}
 	}
 }
 
-static void Bresenham_x(int x0, int y0, int x1, int y1, t_img_strc *img_data)
+static void Bresenham_x(t_point start, t_point end, t_img_strc *img_data)
 {
-	int	x = x0;
-	int	y = y0;
-	int	dx = x1 - x0;
-	int	dy = y1 - y0;
+	int	x = start.x;
+	int	y = start.y;
+	int	dx = end.x - start.x;
+	int	dy = end.y - start.y;
 	int	P = 2 * dy - dx;  // P1(초기값) 설정
 	int	yi = 1;
+
 	if (dy < 0)
 	{
 		yi = -1;
 		dy = -dy;
 	}
-	while (x <= x1)
+	while (x <= end.x)
 	{
-		my_mlx_pixel_put(img_data, x, y, 0xffffff);
+		my_mlx_pixel_put(img_data, x, y, 0x00ff00);
 		x++;  // x는 매 좌표마다 증가
 		if (P < 0)  // Pnext 구하는 부분
 			P = P + 2 * dy;
@@ -66,29 +66,40 @@ static void Bresenham_x(int x0, int y0, int x1, int y1, t_img_strc *img_data)
 	}
 }
 
-//static void brzm_2(int x0, int y0, int x1, int y1, t_img_strc *img_data)
+//static void brzm(t_point start, t_point end, t_img_strc *img_data)
+//{
+//		if (abs(end.y - start.y) < abs(end.x - start.x))
+//		{
+//			if (start.x > end.x)
+//			Bresenham_x(end.x, end.y, start.x, start.y, img_data);
+//			else
+//			Bresenham_x(start.x, start.y, end.x, end.y, img_data);
+//		}
+//		else
+//		{
+//		if (start.y > end.y)
+//			Bresenham_y(end.x, end.y, start.x, start.y, img_data);
+//		else
+//			Bresenham_y(start.x, start.y, end.x, end.y, img_data);
+//		}
+//}
 static void brzm(t_point start, t_point end, t_img_strc *img_data)
 {
 		if (abs(end.y - start.y) < abs(end.x - start.x))
 		{
 			if (start.x > end.x)
-			Bresenham_x(end.x, end.y, start.x, start.y, img_data);
+			Bresenham_x(end, start, img_data);
 			else
-			Bresenham_x(start.x, start.y, end.x, end.y, img_data);
+			Bresenham_x(start, end, img_data);
 		}
 		else
 		{
 		if (start.y > end.y)
-			Bresenham_y(end.x, end.y, start.x, start.y, img_data);
+			Bresenham_y(end, start, img_data);
 		else
-			Bresenham_y(start.x, start.y, end.x, end.y, img_data);
+			Bresenham_y(start, end, img_data);
 		}
 }
-
-//static void brzm_1()
-//{
-//	return ;
-//}
 
 void	draw_line(t_img_strc *img_data, t_prs_data *prs_data)
 {
