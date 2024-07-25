@@ -6,16 +6,10 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/16 08:56:30 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/25 09:00:04 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
-
-//static void	to_upper(char *char_ptr)
-//{
-//	if (*char_ptr <= 'z' && *char_ptr >= 'a')
-//		*char_ptr -= 32;
-//}
 
 static char	***split_gnl_data(t_prs_data *prs_data, t_dnode *gnl_node)
 {
