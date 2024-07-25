@@ -6,14 +6,13 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 09:00:09 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/26 06:11:58 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
 
 int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 {
-//	printf("input: %d\n", input);
 	if (input == XK_Escape)
 	{
 		mlx_destroy_image(mlx_ptrs->init_ptr, mlx_ptrs->img_data->img_ptr);
@@ -35,14 +34,12 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 	t_img_strc	*img;
 
 	img = malloc(sizeof(t_img_strc));
-	/* === init_mlx === */
 	mlx_ptrs->init_ptr = mlx_init();
 	if (mlx_ptrs->init_ptr == 0)
 	{
 		mlx_destroy_display(mlx_ptrs->init_ptr);
 		free(mlx_ptrs->init_ptr);
 	}
-	/* === gen win ptr === */
 	mlx_ptrs->win_ptr = mlx_new_window(mlx_ptrs->init_ptr, WIN_X, WIN_Y, "fdf");
 	if (mlx_ptrs->win_ptr == 0)
 	{
@@ -50,9 +47,9 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 		mlx_destroy_display(mlx_ptrs->init_ptr);
 		free(mlx_ptrs->init_ptr);
 	}
-
 	img->img_ptr = mlx_new_image(mlx_ptrs->init_ptr, 1920, 1010);
-	img->addr = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
+	img->addr = mlx_get_data_addr(
+			img->img_ptr, &img->bits_per_pixel, &img->size_line, &img->endian);
 	mlx_ptrs->img_data = img;
 }
 
@@ -81,14 +78,12 @@ int	main(int argc, char *argv[])
 		err_hdler(OPEN_ERR, 0);
 	fd = open(argv[1], O_RDONLY);
 	mlx_ptrs.prs_data = get_parsed_data(fd, mlx_ptrs.prs_data);
-
 	setup_mlx(&mlx_ptrs);
-
 	iso_prjc(mlx_ptrs.img_data, mlx_ptrs.prs_data);
 	adjust_scale(mlx_ptrs.prs_data);
 	draw_line(mlx_ptrs.img_data, mlx_ptrs.prs_data);
-
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
-	mlx_put_image_to_window(mlx_ptrs.init_ptr, mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
+	mlx_put_image_to_window(mlx_ptrs.init_ptr,
+		mlx_ptrs.win_ptr, mlx_ptrs.img_data->img_ptr, 0, 0);
 	mlx_loop(mlx_ptrs.init_ptr);
 }
