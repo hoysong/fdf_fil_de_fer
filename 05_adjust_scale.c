@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 07:56:42 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 08:55:11 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/26 06:38:15 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	get_bigst_data(t_prs_data *prs_data, t_mv *cdnate)
 {
-	t_point **point;
-	int	i;
-	int	j;
+	t_point	**point;
+	int		i;
+	int		j;
 
 	i = 0;
 	point = prs_data->point;
@@ -58,9 +58,9 @@ static double	calc_gap(t_prs_data *prs_data, t_mv *cdnate)
 
 static void	apply_gap(t_prs_data *prs_data, t_mv *cdnate, double new_gap)
 {
-	int	i;
-	int	j;
-	t_point **point;
+	int		i;
+	int		j;
+	t_point	**point;
 
 	i = 0;
 	j = 0;
@@ -80,8 +80,8 @@ static void	apply_gap(t_prs_data *prs_data, t_mv *cdnate, double new_gap)
 
 void	adjust_scale(t_prs_data *prs_data)
 {
-	t_mv cdnate;
-	double new_gap;
+	t_mv	cdnate;
+	double	new_gap;
 
 	cdnate.mv_x = 0;
 	cdnate.mv_y = 0;
