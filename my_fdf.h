@@ -6,19 +6,18 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 08:54:24 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/26 06:35:00 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FDFMLX_H
-# define FDFMLX_H
+#ifndef MY_FDF_H
+# define MY_FDF_H
 # define WIN_X 1000
 # define WIN_Y 800
 # define OPEN_ERR 1
 # define FILE_NAME_ERR 2
 # define IVLD_MAP 3
 # include "my_libft/linked_list/lkdlist.h"
-# include <stdio.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -36,7 +35,7 @@ typedef struct s_point
 	int	y;
 	int	z;
 	int	color;
-} t_point;
+}	t_point;
 
 typedef struct s_parse_data
 {
@@ -46,7 +45,7 @@ typedef struct s_parse_data
 	char	***splits;
 	t_dnode	*gnl_node;
 	t_point	**point;
-} t_prs_data;
+}	t_prs_data;
 
 typedef struct s_img_struct
 {
@@ -59,9 +58,9 @@ typedef struct s_img_struct
 
 typedef struct s_mlx_prts
 {
-	void	*init_ptr;
-	void	*win_ptr;
-	int		gap;
+	void		*init_ptr;
+	void		*win_ptr;
+	int			gap;
 	t_prs_data	*prs_data;
 	t_img_strc	*img_data;
 }			t_mlx_ptrs;
@@ -74,37 +73,25 @@ typedef struct s_move_point
 
 typedef struct s_brzm
 {
-
 	int	x;
 	int	y;
 	int	dx;
 	int	dy;
-	int	P;
+	int	p;
 	int	i_val;
-} t_brzm;
-
-//typedef struct s_brzm
-//{
-//
-//	int	x = start.x;
-//	int	y = start.y;
-//	int	dx = end.x - start.x;
-//	int	dy = end.y - start.y;
-//	int	P = 2 * dx - dy;  // P1(초기값) 설정
-//	int i_val = 1;
-//} t_brzm;
+}	t_brzm;
 
 t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data);
-t_point	**splits_to_points(t_prs_data *prs_data, char ***splits);
-void	free_splits(char ***splits);
-void	free_points(t_prs_data *prs_data);
-void iso_prjc(t_img_strc *img_data, t_prs_data *prs_data);
-void	my_mlx_pixel_put(t_img_strc *img_data, int x, int y, int color);
-void	draw_line(t_img_strc *img_data, t_prs_data *prs_data);
+t_point		**splits_to_points(t_prs_data *prs_data, char ***splits);
+void		free_splits(char ***splits);
+void		free_points(t_prs_data *prs_data);
+void		iso_prjc(t_img_strc *img_data, t_prs_data *prs_data);
+void		my_mlx_pixel_put(t_img_strc *img_data, int x, int y, int color);
+void		draw_line(t_img_strc *img_data, t_prs_data *prs_data);
+void		db_point(t_mlx_ptrs *mlx_ptrs);
+void		db_point_xy(t_mlx_ptrs *mlx_ptrs);
+void		db_point_xy_prs_data(t_prs_data *prs_data);
+void		pixel_test(t_img_strc *img_data, t_prs_data *prs_data);
+void		adjust_scale(t_prs_data *prs_data);
 
-void db_point(t_mlx_ptrs *mlx_ptrs);
-void db_point_xy(t_mlx_ptrs *mlx_ptrs);
-void db_point_xy_prs_data(t_prs_data *prs_data);
-void	pixel_test(t_img_strc *img_data, t_prs_data *prs_data);
-void	adjust_scale(t_prs_data *prs_data);
 #endif

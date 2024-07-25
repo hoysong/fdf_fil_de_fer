@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:00:47 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/25 08:42:08 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/26 06:34:57 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -19,7 +19,7 @@ static void Bresenham_y(t_point start, t_point end, t_img_strc *img_data)
 	brzm.y = start.y;
 	brzm.dx = end.x - start.x;
 	brzm.dy = end.y - start.y;
-	brzm.P = 2 * brzm.dx - brzm.dy;  // P1(초기값) 설정
+	brzm.p = 2 * brzm.dx - brzm.dy;  // p1(초기값) 설정
 	brzm.i_val = 1;
 	if (brzm.dx < 0)
 	{
@@ -30,10 +30,10 @@ static void Bresenham_y(t_point start, t_point end, t_img_strc *img_data)
 	{
 		my_mlx_pixel_put(img_data, brzm.x, brzm.y, 0x995555);
 		brzm.y++;  // x는 매 좌표마다 증가
-		if (brzm.P < 0)  // Pnext 구하는 부분
-			brzm.P = brzm.P + 2 * brzm.dx;
+		if (brzm.p < 0)  // pnext 구하는 부분
+			brzm.p = brzm.p + 2 * brzm.dx;
 		else {
-			brzm.P = brzm.P + 2 * brzm.dx - 2 * brzm.dy;
+			brzm.p = brzm.p + 2 * brzm.dx - 2 * brzm.dy;
 			brzm.x += brzm.i_val;
 		}
 	}
@@ -46,7 +46,7 @@ static void Bresenham_x(t_point start, t_point end, t_img_strc *img_data)
 	brzm.y = start.y;
 	brzm.dx = end.x - start.x;
 	brzm.dy = end.y - start.y;
-	brzm.P = 2 * brzm.dy - brzm.dx;  // P1(초기값) 설정
+	brzm.p = 2 * brzm.dy - brzm.dx;  // p1(초기값) 설정
 	brzm.i_val = 1;
 
 	if (brzm.dy < 0)
@@ -58,11 +58,11 @@ static void Bresenham_x(t_point start, t_point end, t_img_strc *img_data)
 	{
 		my_mlx_pixel_put(img_data, brzm.x, brzm.y, 0x00ff00);
 		brzm.x++;  // x는 매 좌표마다 증가
-		if (brzm.P < 0)  // Pnext 구하는 부분
-			brzm.P = brzm.P + 2 * brzm.dy;
+		if (brzm.p < 0)  // pnext 구하는 부분
+			brzm.p = brzm.p + 2 * brzm.dy;
 		else
 		{
-			brzm.P = brzm.P + 2 * brzm.dy - 2 * brzm.dx;
+			brzm.p = brzm.p + 2 * brzm.dy - 2 * brzm.dx;
 			brzm.y += brzm.i_val;
 		}
 	}
