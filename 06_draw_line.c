@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:00:47 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/26 06:43:36 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/27 08:24:02 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -28,7 +28,11 @@ static void	bresenham_y(t_point start, t_point end, t_img_strc *img_data)
 	}
 	while (brzm.y <= end.y)
 	{
-		my_mlx_pixel_put(img_data, brzm.x, brzm.y, 0x995555);
+		// 선형 알고리즘에서 brzm의x y , color까지 다 필요하다..
+		// 넘겨주는 파라미터는 t_brzm, t_point가 필요할 것이다.
+		// 구조체 타입으로 넘겨줘야 하며 겸사겸사 파라미터 수도 줄일 수 있다.
+//		my_mlx_pixel_put(img_data, brzm.x, brzm.y, 0x995555);
+		put_pixel(brzm, start, end, img_data);
 		brzm.y++;
 		if (brzm.p < 0)
 			brzm.p = brzm.p + 2 * brzm.dx;
@@ -57,7 +61,9 @@ static void	bresenham_x(t_point start, t_point end, t_img_strc *img_data)
 	}
 	while (brzm.x <= end.x)
 	{
-		my_mlx_pixel_put(img_data, brzm.x, brzm.y, 0x00ff00);
+		//
+		put_pixel(brzm, start, end, img_data);
+//		my_mlx_pixel_put(img_data, brzm.x, brzm.y, 0x00ff00);
 		brzm.x++;
 		if (brzm.p < 0)
 			brzm.p = brzm.p + 2 * brzm.dy;

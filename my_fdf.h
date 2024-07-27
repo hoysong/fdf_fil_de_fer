@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/26 06:35:00 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/28 08:10:08 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,13 @@ typedef struct s_brzm
 	int	i_val;
 }	t_brzm;
 
+typedef struct s_color
+{
+	int	red;
+	int	green;
+	int	blue;
+}	t_color;
+
 t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data);
 t_point		**splits_to_points(t_prs_data *prs_data, char ***splits);
 void		free_splits(char ***splits);
@@ -93,5 +100,6 @@ void		db_point_xy(t_mlx_ptrs *mlx_ptrs);
 void		db_point_xy_prs_data(t_prs_data *prs_data);
 void		pixel_test(t_img_strc *img_data, t_prs_data *prs_data);
 void		adjust_scale(t_prs_data *prs_data);
+void	put_pixel(t_brzm brzm, t_point start, t_point end, t_img_strc *img_data);
 
 #endif

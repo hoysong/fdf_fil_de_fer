@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/26 06:24:10 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/27 08:41:24 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -64,8 +64,8 @@ static void	ft_rotate_z(int *x, int *y, double z_angle)
 
 	prev.x = *x;
 	prev.y = *y;
-	*x = (prev.x * cos(z_angle) - prev.y * sin(z_angle)) * 40;
-	*y = (prev.x * sin(z_angle) + prev.y * cos(z_angle)) * 40;
+	*x = (prev.x * cos(z_angle) - prev.y * sin(z_angle)) * 70;
+	*y = (prev.x * sin(z_angle) + prev.y * cos(z_angle)) * 70;
 }
 
 static void	pixel_put(int x, int y, t_img_strc *img_data, t_prs_data *prs_data)
