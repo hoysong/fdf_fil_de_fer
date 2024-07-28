@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 07:56:42 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/26 06:38:15 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/28 15:55:09 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static void	get_bigst_data(t_prs_data *prs_data, t_mv *cdnate)
 		}
 		i++;
 	}
-	printf("origin cdnate x; %d\n", cdnate->mv_x);
-	printf("origin cdnate y; %d\n", cdnate->mv_y);
 }
 
 static double	calc_gap(t_prs_data *prs_data, t_mv *cdnate)
@@ -45,13 +43,11 @@ static double	calc_gap(t_prs_data *prs_data, t_mv *cdnate)
 	{
 		new_gap = cdnate->mv_x - WIN_X;
 		new_gap = 1 - (new_gap / cdnate->mv_x);
-		printf("gapgapgap; %f\n", new_gap);
 	}
 	else if (cdnate->mv_y - WIN_X < cdnate->mv_y - WIN_Y)
 	{
 		new_gap = cdnate->mv_y - WIN_Y;
 		new_gap = 1 - (new_gap / cdnate->mv_y);
-		printf("gapgapgap; %f\n", new_gap);
 	}
 	return (new_gap);
 }
@@ -89,7 +85,5 @@ void	adjust_scale(t_prs_data *prs_data)
 	if (cdnate.mv_x < WIN_X && cdnate.mv_y < WIN_Y)
 		return ;
 	new_gap = calc_gap(prs_data, &(cdnate));
-	printf("new_gap x; %d\n", cdnate.mv_x);
-	printf("new_gap y; %d\n", cdnate.mv_y);
 	apply_gap(prs_data, &(cdnate), new_gap);
 }
