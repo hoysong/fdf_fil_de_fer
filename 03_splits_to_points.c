@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 01:53:43 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/26 06:36:32 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/07/30 13:54:09 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -30,8 +30,6 @@ static int	color_atoi(char *src)
 			int_value = (int_value * 16) + (*src - 55);
 		++src;
 	}
-	if (int_value == 0)
-		return (0xFFFFFF);
 	return (int_value);
 }
 
@@ -40,6 +38,7 @@ static int	z_atoi(t_point *point_arr, char *z)
 	int	z_value;
 	int	minus;
 
+	point_arr->color = 0xffffff;
 	z_value = 0;
 	if (*z == '-')
 	{
@@ -54,7 +53,8 @@ static int	z_atoi(t_point *point_arr, char *z)
 		z++;
 	}
 	z_value *= minus;
-	point_arr->color = color_atoi(z);
+	if (*z == ',')
+		point_arr->color = color_atoi(z);
 	return (z_value);
 }
 
