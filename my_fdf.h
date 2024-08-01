@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/28 08:10:08 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/01 20:53:42 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define MY_FDF_H
 # define WIN_X 1000
 # define WIN_Y 800
-# define OPEN_ERR 1
-# define FILE_NAME_ERR 2
+# define NO_FILE 1
+# define IVLD_FORMAT 2
 # define IVLD_MAP 3
+# define TOO_MANY_FILES 4
 # include "my_libft/linked_list/lkdlist.h"
 # include <stdio.h>
 # include <fcntl.h>

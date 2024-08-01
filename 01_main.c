@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/26 06:11:58 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/01 21:16:09 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -55,10 +55,15 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 
 void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 {
-	if (err_num == OPEN_ERR)
+	if (err_num == NO_FILE)
 	{
-		write(1, "[err code: 1] open_err\n", 23);
+		write(1, "[err code: 1] no_file\n", 21);
 		exit(1);
+	}
+	else if (err_num == TOO_MANY_FILES)
+	{
+		write(1, "[err] too many files\n", 21);
+		exit (1);
 	}
 	else if (err_num == IVLD_MAP)
 	{
@@ -66,6 +71,28 @@ void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 		write(1, "[err code: 3] ivld_map\n", 23);
 		exit(1);
 	}
+	else if (err_num == IVLD_FORMAT)
+	{
+		write(1, "[err] check file's format\n", 26);
+		exit(1);
+	}
+}
+
+int fmt_chk(char *file_name)
+{
+	int	i;
+
+	i = 0;
+	while (file_name[i])
+		i++;
+	if (i < 4)
+		return (1);
+	if (file_name[i - 1] == 'f'
+			&& file_name[i - 2] == 'd'
+			&& file_name[i - 3] == 'f'
+			&& file_name[i - 4] == '.')
+		return (0);
+	return (1);
 }
 
 int	main(int argc, char *argv[])
@@ -75,7 +102,11 @@ int	main(int argc, char *argv[])
 	t_mlx_ptrs	mlx_ptrs;
 
 	if (argc <= 1)
-		err_hdler(OPEN_ERR, 0);
+		err_hdler(NO_FILE, 0);
+	else if (argc > 2)
+		err_hdler(TOO_MANY_FILES, 0);
+	if (fmt_chk(argv[1]))
+		err_hdler(IVLD_FORMAT, 0);
 	fd = open(argv[1], O_RDONLY);
 	mlx_ptrs.prs_data = get_parsed_data(fd, mlx_ptrs.prs_data);
 	setup_mlx(&mlx_ptrs);
