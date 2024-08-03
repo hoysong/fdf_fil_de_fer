@@ -6,29 +6,15 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:54:51 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/14 07:24:02 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/03 17:24:51 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "lkdlist.h"
-
-t_dnode	*find_head_dubly(t_dnode *dubly_node)
-{
-	while (dubly_node->prev_node != NULL)
-		dubly_node = dubly_node->prev_node;
-	return (dubly_node);
-}
-
-t_dnode	*find_tail_dubly(t_dnode *dubly_node)
-{
-	while (dubly_node->next_node != NULL)
-		dubly_node = dubly_node->next_node;
-	return (dubly_node);
-}
 
 /*
 	1. Description
-		This function can insert linked nodes in the middle of the doubly linked-list.
+		This function can insert linked nodes
+		in the middle of the doubly linked-list.
 		parameter's can be...
 		1. node in the middle of the doubly linked-list.
 		2. head or tail node.
@@ -72,7 +58,8 @@ void	insert_dubl(t_dnode *dest, t_dnode *new_node)
 /*
 	== doubly_node ==
 	1. description.
-		If doubly_node's next_node is NULL, function will init_dubl() to next_node.
+		If doubly_node's next_node is NULL,
+		function will init_dubl() to next_node.
 		and then, insert src to next_node's data.
 		If next_node is not null function will check prev_node.
 		If prev_node is null it will init_dubl() prev_node.
@@ -108,6 +95,7 @@ t_dnode	*insert_data_dubl(t_dnode *doubly_node, void *src)
 	2. return value
 		memory allocated node
  */
+
 t_dnode	*init_dubl(void)
 {
 	t_dnode	*node;

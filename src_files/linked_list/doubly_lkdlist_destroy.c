@@ -6,11 +6,25 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:54:51 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/04 04:29:15 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/03 17:24:29 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkdlist.h"
+
+t_dnode	*find_head_dubly(t_dnode *dubly_node)
+{
+	while (dubly_node->prev_node != NULL)
+		dubly_node = dubly_node->prev_node;
+	return (dubly_node);
+}
+
+t_dnode	*find_tail_dubly(t_dnode *dubly_node)
+{
+	while (dubly_node->next_node != NULL)
+		dubly_node = dubly_node->next_node;
+	return (dubly_node);
+}
 
 /*
 	== destroy_next_chain ==
@@ -40,7 +54,8 @@ void	destroy_next_chain(t_dnode *doubly_node)
 /*
 	== destroy_prev_chain ==
 	1. description
-		this function destory prev chains.
+		this function is for doubly_lkdlist.
+		destory it's prev chains.
 		works for doubly linked list.
 		recommand parameter is like node->prev_node.
 	2. return value
