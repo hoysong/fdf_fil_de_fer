@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 01:59:56 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 02:02:10 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -73,7 +73,7 @@ void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 	exit(1);
 }
 
-static int fmt_chk(char *file_name)
+static int	fmt_chk(char *file_name)
 {
 	int	i;
 
@@ -83,9 +83,9 @@ static int fmt_chk(char *file_name)
 	if (i < 4)
 		return (1);
 	if (file_name[i - 1] == 'f'
-			&& file_name[i - 2] == 'd'
-			&& file_name[i - 3] == 'f'
-			&& file_name[i - 4] == '.')
+		&& file_name[i - 2] == 'd'
+		&& file_name[i - 3] == 'f'
+		&& file_name[i - 4] == '.')
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 05:31:06 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 01:47:45 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 02:03:04 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -26,6 +26,7 @@ static float	get_dist(t_point start, t_point end)
 	btw_start_end = sqrt(pow(x1 - x2, 2) + pow(y2 - y1, 2));
 	return (btw_start_end);
 }
+
 static float	strt_brzm_dist(t_brzm start, t_point end)
 {
 	float	x1;
@@ -49,10 +50,8 @@ static t_color	get_rgb(int hex_color)
 	rgb.red = *((unsigned char *)&hex_color + 2);
 	rgb.green = *((unsigned char *)&hex_color + 1);
 	rgb.blue = *((unsigned char *)&hex_color);
-
 	return (rgb);
 }
-
 
 static int	calc_color(int strt_clr, int end_clr, float precent)
 {
@@ -74,8 +73,6 @@ void	put_pixel(t_brzm brzm, t_point start, t_point end, t_img_strc *img_data)
 
 	start_end_dist = get_dist(start, end);
 	brzm_dist = strt_brzm_dist(brzm, start);
-	//printf("%x\n", start.color);
-
 	new_color = calc_color(start.color, end.color, brzm_dist / start_end_dist);
 	my_mlx_pixel_put(img_data, brzm.x, brzm.y, new_color);
 	return ;
