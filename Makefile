@@ -4,15 +4,16 @@
 # "OBJS = $(SRCS:.c=.o)"
 
 SRCS = \
-	01_main.c \
-	02_get_parsed_data.c \
+	01_main.c             \
+	02_get_parsed_data.c  \
 	03_splits_to_points.c \
-	04_iso_prjc.c \
-	05_adjust_scale.c \
-	06_draw_line.c \
-	07_put_pixel.c \
-	99_free_data.c \
-	99_my_mlx_pixel_put.c
+	04_iso_prjc.c         \
+	05_adjust_scale.c     \
+	06_draw_line.c        \
+	07_put_pixel.c        \
+	08_put_pixel.c        \
+	99_free_data.c        \
+	99_my_mlx_pixel_put.c \
 
 CC = cc
 
