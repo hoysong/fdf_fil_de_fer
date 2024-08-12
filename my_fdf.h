@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/03 17:28:20 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 01:48:40 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ void		db_point_xy_prs_data(t_prs_data *prs_data);
 void		pixel_test(t_img_strc *img_data, t_prs_data *prs_data);
 void		adjust_scale(t_prs_data *prs_data);
 void	put_pixel(t_brzm brzm, t_point start, t_point end, t_img_strc *img_data);
+int	get_new_rgb(t_color *start, t_color *end, float precent);
 
 #endif

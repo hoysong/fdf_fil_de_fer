@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 05:31:06 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/30 13:43:28 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 01:47:45 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -53,41 +53,6 @@ static t_color	get_rgb(int hex_color)
 	return (rgb);
 }
 
-static int	get_new_rgb(t_color *start, t_color *end, float precent)
-{
-	int				new_rgb;
-	int				updown;
-	unsigned char	*new_ptr;
-
-	new_rgb = 0;
-	new_ptr = (unsigned char *)&new_rgb;
-
-	updown = ((start->blue - end->blue) * precent);
-	if (start->blue < end->blue)
-		updown *= -1;
-	if (start->blue > end->blue)
-		updown *= -1;
-	*new_ptr = start->blue + updown;
-	new_ptr++;
-
-	updown = ((start->green - end->green) * precent);
-	if (start->green < end->green)
-		updown *= -1;
-	if (start->green > end->green)
-		updown *= -1;
-	*new_ptr = start->green + updown;
-	new_ptr++;
-
-	updown = ((start->red - end->red) * precent);
-	if (start->red < end->red)
-		updown *= -1;
-	if (start->red > end->red)
-		updown *= -1;
-	*new_ptr = start->red + updown;
-	new_ptr++;
-
-	return (new_rgb);
-}
 
 static int	calc_color(int strt_clr, int end_clr, float precent)
 {
