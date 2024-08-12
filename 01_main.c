@@ -6,12 +6,12 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/01 21:16:09 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 01:59:56 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
 
-int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
+static int	inpt_hdler(int input, t_mlx_ptrs *mlx_ptrs)
 {
 	if (input == XK_Escape)
 	{
@@ -56,29 +56,24 @@ static void	setup_mlx(t_mlx_ptrs *mlx_ptrs)
 void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 {
 	if (err_num == NO_FILE)
-	{
-		write(1, "[err code: 1] no_file\n", 21);
-		exit(1);
-	}
+		ft_putstr_fd("[err] no_file\n", 1);
 	else if (err_num == TOO_MANY_FILES)
-	{
-		write(1, "[err] too many files\n", 21);
-		exit (1);
-	}
+		ft_putstr_fd("[err] too many files\n", 1);
 	else if (err_num == IVLD_MAP)
 	{
 		free(mlx_ptrs->prs_data);
-		write(1, "[err code: 3] ivld_map\n", 23);
-		exit(1);
+		ft_putstr_fd("[err] ivld_map\n", 1);
 	}
 	else if (err_num == IVLD_FORMAT)
+		ft_putstr_fd("[err] check file's format\n", 1);
+	else if (err_num == OPEN_ERR)
 	{
-		write(1, "[err] check file's format\n", 26);
-		exit(1);
+		ft_putstr_fd("[err] open fail\n", 1);
 	}
+	exit(1);
 }
 
-int fmt_chk(char *file_name)
+static int fmt_chk(char *file_name)
 {
 	int	i;
 
@@ -108,6 +103,8 @@ int	main(int argc, char *argv[])
 	if (fmt_chk(argv[1]))
 		err_hdler(IVLD_FORMAT, 0);
 	fd = open(argv[1], O_RDONLY);
+	if (fd <= 0)
+		err_hdler(OPEN_ERR, 0);
 	mlx_ptrs.prs_data = get_parsed_data(fd, mlx_ptrs.prs_data);
 	setup_mlx(&mlx_ptrs);
 	iso_prjc(mlx_ptrs.img_data, mlx_ptrs.prs_data);
