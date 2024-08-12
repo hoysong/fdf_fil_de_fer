@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 01:55:12 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 02:17:14 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,13 @@ void		free_points(t_prs_data *prs_data);
 void		iso_prjc(t_img_strc *img_data, t_prs_data *prs_data);
 void		my_mlx_pixel_put(t_img_strc *img_data, int x, int y, int color);
 void		draw_line(t_img_strc *img_data, t_prs_data *prs_data);
-void		db_point(t_mlx_ptrs *mlx_ptrs);
-void		db_point_xy(t_mlx_ptrs *mlx_ptrs);
-void		db_point_xy_prs_data(t_prs_data *prs_data);
-void		pixel_test(t_img_strc *img_data, t_prs_data *prs_data);
 void		adjust_scale(t_prs_data *prs_data);
-void	put_pixel(t_brzm brzm, t_point start, t_point end, t_img_strc *img_data);
-int	get_new_rgb(t_color *start, t_color *end, float precent);
+void		put_pixel(
+				t_brzm brzm,
+				t_point start,
+				t_point end,
+				t_img_strc *img_data
+				);
+int			get_new_rgb(t_color *start, t_color *end, float precent);
 
 #endif

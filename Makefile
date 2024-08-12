@@ -1,8 +1,3 @@
-# %.o: %.c
-#	 $(CC) $(CFLAGS) -c $? -o $@
-# is replaced by
-# "OBJS = $(SRCS:.c=.o)"
-
 SRCS = \
 	01_main.c             \
 	02_get_parsed_data.c  \
@@ -12,7 +7,7 @@ SRCS = \
 	06_draw_line.c        \
 	07_put_pixel.c        \
 	08_put_pixel.c        \
-	99_free_data.c        \
+	09_free_data.c        \
 	99_my_mlx_pixel_put.c \
 
 CC = cc
