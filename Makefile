@@ -18,27 +18,41 @@ OBJS = $(SRCS:.c=.o)
 
 AR = ar -r 
 
-NAME = fdf.a
+ARNAME = fdf.a
+
+PROG_NAME = fdf
 
 LIBFT_PATH = ./src_files/my_libft/
 
-$(NAME): $(OBJS)
+$(ARNAME): $(OBJS)
 	$(AR) $@ $(OBJS)
 
-all: $(NAME)
+all: $(ARNAME)
+	clear
+	@echo Making "\e[32m$(PROG_NAME)\e[0m"
 	make -C $(LIBFT_PATH) all
-	cc -o fdf $(NAME) -Lminilibx-linux -lmlx -Lsrc_files/my_libft -lft -lX11 -lXext -lm -g
+	cc -o $(PROG_NAME) $(ARNAME) -Lminilibx-linux -lmlx -lX11 -lXext -lm -L$(LIBFT_PATH) -lft -g
+	@echo "\e[32mDone.\e[0m"
 
 RM = rm -f
 
 clean:
+	@echo clean "\e[32m$(PROG_NAME)\e[0m"
 	$(RM) $(OBJS)
+	@echo clean "\e[32m$(LIBFT_PATH)\e[0m"
 	make -C $(LIBFT_PATH) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	@echo fclean "\e[32m$(LIBFT_PATH)\e[0m"
 	make -C $(LIBFT_PATH) fclean
-	rm fdf
+	$(RM) $(ARNAME)
+	@if [ -e "$(PROG_NAME)" ]; then \
+		echo "\e[32m$(PROG_NAME)\e[0m exist"; \
+		$(RM) $(PROG_NAME); \
+		echo "\e[32m$(PROG_NAME)\e[0m deleted"; \
+	else \
+		echo "\e[32m$(PROG_NAME)\e[0m not exist"; \
+	fi
 
 re: fclean
 	make all
