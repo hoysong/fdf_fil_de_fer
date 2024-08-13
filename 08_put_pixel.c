@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 01:38:56 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 01:47:38 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 14:12:05 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -26,7 +26,6 @@ static int	calc_rgb(int start, int end, float precent)
 int	get_new_rgb(t_color *start, t_color *end, float precent)
 {
 	int				new_rgb;
-	int				updown;
 	unsigned char	*new_ptr;
 
 	new_rgb = 0;

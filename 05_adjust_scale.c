@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 07:56:42 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/28 15:55:09 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 14:10:56 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	get_bigst_data(t_prs_data *prs_data, t_mv *cdnate)
 	}
 }
 
-static double	calc_gap(t_prs_data *prs_data, t_mv *cdnate)
+static double	calc_gap(t_mv *cdnate)
 {
 	double	new_gap;
 
@@ -52,7 +52,7 @@ static double	calc_gap(t_prs_data *prs_data, t_mv *cdnate)
 	return (new_gap);
 }
 
-static void	apply_gap(t_prs_data *prs_data, t_mv *cdnate, double new_gap)
+static void	apply_gap(t_prs_data *prs_data, double new_gap)
 {
 	int		i;
 	int		j;
@@ -84,6 +84,6 @@ void	adjust_scale(t_prs_data *prs_data)
 	get_bigst_data(prs_data, &(cdnate));
 	if (cdnate.mv_x < WIN_X && cdnate.mv_y < WIN_Y)
 		return ;
-	new_gap = calc_gap(prs_data, &(cdnate));
-	apply_gap(prs_data, &(cdnate), new_gap);
+	new_gap = calc_gap(&(cdnate));
+	apply_gap(prs_data, new_gap);
 }

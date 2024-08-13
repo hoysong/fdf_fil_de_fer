@@ -18,20 +18,26 @@ OBJS = $(SRCS:.c=.o)
 
 AR = ar -r 
 
-NAME = libftprintf.a
+NAME = fdf.a
+
+LIBFT_PATH = ./src_files/my_libft/
 
 $(NAME): $(OBJS)
 	$(AR) $@ $(OBJS)
 
 all: $(NAME)
-
+	make -C $(LIBFT_PATH) all
+	cc -o fdf $(NAME) -Lminilibx-linux -lmlx -Lsrc_files/my_libft -lft -Lsrc_files/linked_list -llkdlist -lX11 -lXext -lm -g
 RM = rm -f
 
 clean:
 	$(RM) $(OBJS)
+	make -C $(LIBFT_PATH) clean
 
 fclean: clean
 	$(RM) $(NAME)
+	make -C $(LIBFT_PATH) fclean
+	rm fdf
 
 re: fclean
 	make all

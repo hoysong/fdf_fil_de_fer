@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 02:02:10 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 13:53:42 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -93,7 +93,6 @@ static int	fmt_chk(char *file_name)
 int	main(int argc, char *argv[])
 {
 	int			fd;
-	char		**str;
 	t_mlx_ptrs	mlx_ptrs;
 
 	if (argc <= 1)
