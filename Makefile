@@ -1,5 +1,3 @@
-$(info $(SRCS))
-
 SRCS = \
 	01_main.c             \
 	02_get_parsed_data.c  \
