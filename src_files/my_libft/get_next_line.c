@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 19:57:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/06/05 16:46:58 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/05/28 13:37:55 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -69,7 +69,7 @@ char	*get_next_line(int fd)
 		tmp = ft_strjoin(save, buff);
 		free(save);
 		save = get_remain(&tmp, &read_len);
-		if (save != NULL || GNL_BUFFER_SIZE > read_len)
+		if (save != 0 || GNL_BUFFER_SIZE > read_len)
 			break ;
 	}
 	free(buff);

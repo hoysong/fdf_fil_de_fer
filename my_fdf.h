@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 02:17:14 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/13 15:52:26 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define IVLD_MAP 3
 # define TOO_MANY_FILES 4
 # define OPEN_ERR 5
-# include "src_files/linked_list/lkdlist.h"
+# include "src_files//my_libft/linked_list/lkdlist.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>

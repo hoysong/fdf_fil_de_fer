@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <hoysong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 13:17:42 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 15:30:21 by hoysong          ###   ########.fr       */
+/*   Created: 2024/03/29 08:30:46 by hoysong           #+#    #+#             */
+/*   Updated: 2024/04/04 14:22:40 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
+# include <unistd.h>
+# include <stdarg.h>
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	write(fd, s, ft_strlen(s));
-}
+int		ft_putchar_fd(char c, int fd);
+int		ft_putstr_fd(const char *s, int fd);
+int		ft_printf(const char *args, ...);
+int		nbrbase(unsigned long long big_nbr, char *base);
+int		sign_nbr_base(long long big_nbr, char *base);
+
+#endif

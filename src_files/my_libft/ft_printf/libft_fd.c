@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   libft_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <hoysong@student.42gyeongsan.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:17:42 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 15:30:21 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/04/01 08:26:16 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libftprintf.h"
 
-#include "libft.h"
-
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(const char *s, int fd)
 {
-	write(fd, s, ft_strlen(s));
+	const char	*start;
+	int			s_len;
+
+	start = s;
+	while (*s++)
+		;
+	s_len = --s - start;
+	write(fd, start, s_len);
+	return (s_len);
+}
+
+int	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+	return (1);
 }

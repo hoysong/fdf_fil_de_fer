@@ -27,7 +27,8 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 	make -C $(LIBFT_PATH) all
-	cc -o fdf $(NAME) -Lminilibx-linux -lmlx -Lsrc_files/my_libft -lft -Lsrc_files/linked_list -llkdlist -lX11 -lXext -lm -g
+	cc -o fdf $(NAME) -Lminilibx-linux -lmlx -Lsrc_files/my_libft -lft -lX11 -lXext -lm -g
+
 RM = rm -f
 
 clean:
