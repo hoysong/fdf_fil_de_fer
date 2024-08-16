@@ -12,7 +12,7 @@ SRCS = \
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g
 
 OBJS = $(SRCS:.c=.o)
 
@@ -31,7 +31,7 @@ all: $(ARNAME)
 	clear
 	@echo Making "\e[32m$(PROG_NAME)\e[0m"
 	make -C $(LIBFT_PATH) all
-	cc -o $(PROG_NAME) $(ARNAME) -Lminilibx-linux -lmlx -lX11 -lXext -lm -L$(LIBFT_PATH) -lft -g
+	cc -g -o $(PROG_NAME) $(ARNAME) -Lminilibx-linux -lmlx -lX11 -lXext -lm -L$(LIBFT_PATH) -lft -g
 	@echo "\e[32mDone.\e[0m"
 
 RM = rm -f

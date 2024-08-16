@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 07:56:42 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 14:10:56 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/16 14:44:29 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static double	calc_gap(t_mv *cdnate)
 {
 	double	new_gap;
 
+	new_gap = 0.0;
 	if (cdnate->mv_x - WIN_X > cdnate->mv_y - WIN_Y)
 	{
 		new_gap = cdnate->mv_x - WIN_X;

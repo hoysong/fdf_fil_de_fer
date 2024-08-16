@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/07/26 06:14:45 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/16 16:48:35 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -61,6 +61,34 @@ static int	get_one_line_elements(char ***splits)
 	return (i);
 }
 
+void map_vld_chk(t_prs_data *prs_data)
+{
+	int	x = 0;
+	int	y = 0;
+	int		elmts;
+	const char	***splits;
+
+	elmts = prs_data->horiz;
+	splits = (const char ***)prs_data->splits;
+
+	printf("elements: %d\n", elmts);
+	while (y < prs_data->file_lines)
+	{
+		x = 0;
+		printf("%p: ", splits[y]);
+		while (splits[y][x] != 0)
+		{
+			printf("%s ",splits[y][x]);
+			x++;
+		}
+		if (x != elmts)
+			printf("not vld");
+		printf("\n");
+		y++;
+	}
+	return ;
+}
+
 t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data)
 {
 	prs_data = malloc(sizeof(t_prs_data));
@@ -69,6 +97,7 @@ t_prs_data	*get_parsed_data(int fd, t_prs_data *prs_data)
 	prs_data->gnl_node = read_file_with_gnl(fd, prs_data);
 	prs_data->splits = split_gnl_data(prs_data, prs_data->gnl_node);
 	prs_data->horiz = get_one_line_elements(prs_data->splits);
+	map_vld_chk(prs_data);
 	prs_data->point = splits_to_points(prs_data, prs_data->splits);
 	return (prs_data);
 }
