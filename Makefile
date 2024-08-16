@@ -12,7 +12,7 @@ SRCS = \
 
 CC = cc
 
-CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 07:25:01 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 15:52:26 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/16 19:33:50 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define IVLD_MAP 3
 # define TOO_MANY_FILES 4
 # define OPEN_ERR 5
-# include "src_files//my_libft/linked_list/lkdlist.h"
+# include "src_files/my_libft/linked_list/lkdlist.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -104,5 +104,6 @@ void		put_pixel(
 				t_img_strc *img_data
 				);
 int			get_new_rgb(t_color *start, t_color *end, float precent);
-
+void		err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs);
+void		free_ivld_map(t_mlx_ptrs *mlx_ptrs);
 #endif

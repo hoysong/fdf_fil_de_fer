@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 13:53:42 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/16 19:25:51 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -59,16 +59,16 @@ void	err_hdler(int err_num, t_mlx_ptrs *mlx_ptrs)
 		ft_putstr_fd("[err] no_file\n", 1);
 	else if (err_num == TOO_MANY_FILES)
 		ft_putstr_fd("[err] too many files\n", 1);
-	else if (err_num == IVLD_MAP)
-	{
-		free(mlx_ptrs->prs_data);
-		ft_putstr_fd("[err] ivld_map\n", 1);
-	}
 	else if (err_num == IVLD_FORMAT)
 		ft_putstr_fd("[err] check file's format\n", 1);
 	else if (err_num == OPEN_ERR)
 	{
 		ft_putstr_fd("[err] open fail\n", 1);
+	}
+	else if (err_num == IVLD_MAP)
+	{
+		ft_putstr_fd("[err] ivld_map\n", 1);
+		free_ivld_map(mlx_ptrs);
 	}
 	exit(1);
 }
@@ -105,6 +105,8 @@ int	main(int argc, char *argv[])
 	if (fd <= 0)
 		err_hdler(OPEN_ERR, 0);
 	mlx_ptrs.prs_data = get_parsed_data(fd, mlx_ptrs.prs_data);
+	if (mlx_ptrs.prs_data->point == 0)
+		err_hdler(IVLD_MAP, &mlx_ptrs);
 	setup_mlx(&mlx_ptrs);
 	iso_prjc(mlx_ptrs.img_data, mlx_ptrs.prs_data);
 	adjust_scale(mlx_ptrs.prs_data);

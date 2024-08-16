@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 02:52:37 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 14:08:34 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/16 19:34:30 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -51,7 +51,6 @@ static void	get_low_num(
 	}
 }
 
-//put pixel in img buffer
 static void	ft_rotate_z(int *x, int *y, double z_angle)
 {
 	t_point	prev;

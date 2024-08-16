@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   99_free_data.c                                     :+:      :+:    :+:   */
+/*   09_free_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 01:51:25 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/13 02:03:55 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/16 19:24:59 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,11 @@ void	free_points(t_prs_data *prs_data)
 	while (i < prs_data->vert)
 		free(point_arr[i++]);
 	free(point_arr);
+}
+
+void	free_ivld_map(t_mlx_ptrs *mlx_ptrs)
+{
+	free_splits(mlx_ptrs->prs_data->splits);
+	destroy_doubly_list(mlx_ptrs->prs_data->gnl_node);
+	free(mlx_ptrs->prs_data);
 }
