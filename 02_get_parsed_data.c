@@ -6,7 +6,7 @@
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 18:26:00 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/16 19:32:31 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/19 17:54:04 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -76,6 +76,10 @@ int	map_vld_chk(t_prs_data *prs_data)
 		x = 0;
 		while (splits[y][x] != 0)
 		{
+			if (splits[y][x][0] == '\n')
+			{
+				return (1);
+			}
 			x++;
 		}
 		if (x != elmts)
