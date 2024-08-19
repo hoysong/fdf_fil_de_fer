@@ -24,15 +24,15 @@ PROG_NAME = fdf
 
 LIBFT_PATH = ./src_files/my_libft/
 
-$(ARNAME): $(OBJS)
-	$(AR) $@ $(OBJS)
-
 all: $(ARNAME)
 	clear
 	@echo Making "\e[32m$(PROG_NAME)\e[0m"
 	make -C $(LIBFT_PATH) all
 	cc -g -o $(PROG_NAME) $(ARNAME) -Lminilibx-linux -lmlx -lX11 -lXext -lm -L$(LIBFT_PATH) -lft -g
 	@echo "\e[32mDone.\e[0m"
+
+$(ARNAME): $(OBJS)
+	$(AR) $@ $(OBJS)
 
 RM = rm -f
 
