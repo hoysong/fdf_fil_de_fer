@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoysong <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 19:57:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/05/28 13:37:55 by hoysong          ###   ########.fr       */
+/*   Created: 2024/08/21 01:47:38 by hoysong           #+#    #+#             */
+/*   Updated: 2024/08/21 01:48:04 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -52,7 +52,7 @@ static void	setup(ssize_t *read_len, char **tmp, char **buff, char **save)
 		*tmp = ft_strdup("");
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line_fdf(int fd)
 {
 	ssize_t			read_len;
 	static char		*save;
@@ -79,4 +79,21 @@ char	*get_next_line(int fd)
 		return (0);
 	}
 	return (tmp);
+}
+
+char	*get_next_line(int fd)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = get_next_line_fdf(fd);
+	if (str != NULL)
+	{
+		while (str[i] != '\n' && str[i] != '\0')
+			i++;
+		if (str[i] == '\n')
+			str[i] = '\0';
+	}
+	return (str);
 }
