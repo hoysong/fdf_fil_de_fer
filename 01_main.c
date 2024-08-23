@@ -6,7 +6,7 @@
 /*   By: hoysong <hoysong@42gyeongsan.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:34:41 by hoysong           #+#    #+#             */
-/*   Updated: 2024/08/16 19:25:51 by hoysong          ###   ########.fr       */
+/*   Updated: 2024/08/23 20:16:26 by hoysong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_fdf.h"
@@ -110,6 +110,7 @@ int	main(int argc, char *argv[])
 	setup_mlx(&mlx_ptrs);
 	iso_prjc(mlx_ptrs.img_data, mlx_ptrs.prs_data);
 	adjust_scale(mlx_ptrs.prs_data);
+//	adjust_scale(mlx_ptrs.prs_data);
 	draw_line(mlx_ptrs.img_data, mlx_ptrs.prs_data);
 	mlx_hook(mlx_ptrs.win_ptr, KeyPress, KeyPressMask, inpt_hdler, &mlx_ptrs);
 	mlx_put_image_to_window(mlx_ptrs.init_ptr,
