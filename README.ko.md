@@ -79,13 +79,11 @@ make
 
 빌드가 완료되면 `fdf` 실행 파일이 생성됩니다.
 
-생성된 파일을 정리하려면 다음 명령을 사용합니다.
-
-```bash
-make clean
-make fclean
-make re
-```
+| Make 대상 | 역할 |
+| --- | --- |
+| `clean` | FdF 오브젝트 파일을 삭제하고 Libft의 `clean` 대상을 실행합니다. |
+| `fclean` | `clean`을 수행한 뒤 `fdf.a`, `fdf` 실행 파일과 Libft의 생성 파일을 삭제합니다. |
+| `re` | `fclean`을 수행한 뒤 전체 대상을 다시 빌드합니다. |
 
 ## 6. 실행
 
