@@ -79,13 +79,11 @@ make
 
 The build creates an executable named `fdf`.
 
-To remove generated files:
-
-```bash
-make clean
-make fclean
-make re
-```
+| Make target | Role |
+| --- | --- |
+| `clean` | Remove the FdF object files and run Libft's `clean` target. |
+| `fclean` | Run `clean`, then remove `fdf.a`, the `fdf` executable, and Libft's generated files. |
+| `re` | Run `fclean` and rebuild all targets. |
 
 ## 6. Run
 
